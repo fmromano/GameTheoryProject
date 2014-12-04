@@ -27,9 +27,9 @@ if nargin == 1, error('Please specify other preference matrix and quota vector.'
 
 %Set vectors and matrices
 numAppl = length(applicantPref(:,1));
-numInst = length(institutionPref(1,:));
-applyMat = zeros(numAppl,numInst);
-tentAcceptMat = zeros(numAppl,numInst);
+numInst = length(institutionPref(:,1));
+applyMat = zeros(numInst,numAppl);
+tentAcceptMat = zeros(numInst,numAppl);
 responseMatrix = applyMat;
 applFree = ones(numAppl,1);
 instFree = ones(numInst,1);
@@ -106,7 +106,7 @@ while allMatched == 0
     end
 end %while allMatched == 0
 
-disp(responseMatrix);
+responseMatrix
 
 
 fullIndices = find(instFree == 0);
@@ -126,8 +126,8 @@ if sum(applFree) > 0
     leftoverAppl = find(applFree == 1);
 end
 
-disp(leftoverInst)
-disp(leftoverAppl)
+leftoverInst
+leftoverAppl
 
 
 
