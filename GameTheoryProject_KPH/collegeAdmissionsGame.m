@@ -10,7 +10,6 @@ function [responseMatrix, leftoverAppl, leftoverInst, leftoverQuota] = ...
 
 %To do:
 %1. Test this more.  I have only tried this with easy examples.
-%2. Provide a leftovers matrix for when there are extra applicants.
 
 %Testing to see what is present...
 if nargin < 1
@@ -108,7 +107,6 @@ end %while allMatched == 0
 
 responseMatrix
 
-
 fullIndices = find(instFree == 0);
 quotaArrayLengths(fullIndices) = 0;
 
@@ -127,8 +125,7 @@ if sum(applFree) > 0
 end
 
 leftoverInst
+leftoverQuota
 leftoverAppl
-
-
 
 end %end of the function
