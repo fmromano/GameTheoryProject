@@ -42,4 +42,11 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
         compPrefMatrix(x,:) = jobsWithMostCores
     end
 
+    % Reformat compPrefMatrix to be input to collegeAdmissionsGame
+    for x = 1:totalNumComps
+        [notUsed, compPrefFormatted] = sort(compPrefMatrix(x,:))
+        compPrefMatrix(x,:) = compPrefFormatted
+    end
+
+end
 

@@ -78,5 +78,12 @@ function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, max
         jobPrefMatrix(jobNum,:) = jobPref
     end
 
+    % Reformat jobPrefMatrix to be input to collegeAdmissionsGame
+    for x = 1:totalNumJobs
+        [notUsed, jobPrefFormatted] = sort(jobPrefMatrix(x,:))
+        jobPrefMatrix(x,:) = jobPrefFormatted
+    end
+
 end
+
 
