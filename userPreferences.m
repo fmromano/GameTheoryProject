@@ -34,23 +34,27 @@ function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, max
 
     %TODO: Check validity of array dimensions
 
+    totalNumComps = size(coreAvailabilityMatrix,1)
+    totalNumJobs = size(speedMatrix,1)
+    totalNumCoreTypes = size(speedMatrix,2)
+
     % Initialize Returned Preference Matrix
     % Each row is a job's ranking of the computers by preference.
     % 1 means most preferred.
-    jobPrefMatrix = zeros(size(speedMatrix,1),size(coreAvailabilityMatrix,1))
+    jobPrefMatrix = zeros(totalNumJobs,totalNumComps)
 
     % For each job, 
-    for jobNum = 1:size(speedMatrix,1)
+    for jobNum = 1:totalNumJobs
         tmpCoreAvailabilityMatrix = coreAvailabilityMatrix
-        processingPower = zeros(1,size(tmpCoreAvailabilityMatrix,1))
+        processingPower = zeros(1,totalNumComps)
         % For each computer
-        for compNum = 1:size(tmpCoreAvailabilityMatrix,1)
+        for compNum = 1:totalNumComps
             coresAddedSoFar = 0
             % Calculate relative speed at completing job
             [sortedCoreSpeeds,coreTypeRanking] = sort(speedMatrix(jobNum,:),'descend') 
-            for x = 1:size(speedMatrix,2)
+            for coreNum = 1:totalNumCoreTypes
                 % Find the best core for this job
-                nextBestCoreType = coreTypeRanking(x)
+                nextBestCoreType = coreTypeRanking(coreNum)
                 % Use all the cores of this type that the computer has available.
                 while tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)>0
                     % For each core used, add its processing power to the total
@@ -63,14 +67,16 @@ function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, max
                         break
                     end
                 end
+                % Stop if job has reached max number of cores
                 if coresAddedSoFar == maxNumCoresMatrix(jobNum)
                     break
                 end
             end
         end
+        % Create current job's preference list
         [processingPowerSorted, jobPref] = sort(processingPower, 'descend')
         jobPrefMatrix(jobNum,:) = jobPref
     end
-              
+
 end
 
