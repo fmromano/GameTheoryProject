@@ -29,7 +29,7 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
 
         % The nth element is the max number of cores that can be used by job n.
         % The number of columns should be the number of jobs.
-        maxNumCoresMatrix = [8,20,10,4,1,50]
+        maxNumCoresMatrix = [8,20,10,1,50]
     end
 
     totalNumComps = size(coreAvailabilityMatrix,1)
