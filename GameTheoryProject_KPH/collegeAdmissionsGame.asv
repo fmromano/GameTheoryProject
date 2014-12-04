@@ -117,7 +117,7 @@ leftoverQuota = [];
 if sum(instFree) > 0
     leftoverInst = find(instFree == 1);
     for mLoop = 1:length(leftoverInst)
-        leftoverQuota(mLoop) = quotaArrayLengths(leftoverInst(mLoop));
+        leftoverQu
     end
 end
 
