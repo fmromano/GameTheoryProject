@@ -7,8 +7,6 @@ addpath('../');
 
 jobPrefs = jobPreferences()
 compPrefs = compPreferences()
+quotaArray = ones(1,size(jobPrefs,1))
 
-%men_pref = [4 1 2 3; 2 3 1 4; 2 4 3 1; 3 1 4 2; 3 4 1 2];
-%women_pref = [4 1 3 2 5; 1 3 2 4 5; 1 2 3 4 5; 4 1 3 2 5];
-
-resultMatrix = collegeAdmissionsGame(jobPrefs,compPrefs,[1 1 1 1]);
+resultMatrix = collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
