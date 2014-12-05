@@ -9,8 +9,7 @@ function [responseMatrix, leftoverAppl, leftoverInst, leftoverQuota] = ...
 %And so on for both the applicants and institutions.
 
 %To do:
-%1. Test this more.  I have only tried this with easy examples.
-%2. Provide a leftovers matrix for when there are extra applicants.
+% 1. Test this more.  I have only tried this with easy examples.
 
 %Testing to see what is present...
 if nargin < 1
