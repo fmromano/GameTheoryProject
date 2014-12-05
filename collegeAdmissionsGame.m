@@ -4,8 +4,8 @@ function [responseMatrix, leftoverAppl, leftoverInst, leftoverQuota] = ...
 %Help documentation here
 %Assuming applicants apply first
 %Matrix setup assumption:
-%A = [1st 2nd 3rd ...]
-%B = [1st 2nd 3rd ...]
+%A = [1stChoice 2nd 3rd ...]
+%B = [1stChoice 2nd 3rd ...]
 %And so on for both the applicants and institutions.
 
 %To do:
@@ -15,7 +15,7 @@ function [responseMatrix, leftoverAppl, leftoverInst, leftoverQuota] = ...
 if nargin < 1
     applicantPref = [3 2 3 1;3 1 3 1;3 2 1 1];
     institutionPref = [3 2 1; 3 2 1;3 2 1];
-    quotaArrayLengths = [1 1 2];
+    quotaArrayLengths = [2 2 2];
 end
 if nargin == 1, error('Please specify other preference matrix and quota vector.'); end
 % Still thinking on this one...
@@ -115,7 +115,8 @@ leftoverQuota = [];
 if sum(instFree) > 0
     leftoverInst = find(instFree == 1);
     for mLoop = 1:length(leftoverInst)
-        leftoverQuota(mLoop) = quotaArrayLengths(leftoverInst(mLoop));
+        leftoverQuota(mLoop) = quotaArrayLengths(leftoverInst(mLoop))...
+            - nnz(responseMatrix(mLoop,:));
     end
 end
 
