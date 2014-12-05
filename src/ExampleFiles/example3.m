@@ -48,8 +48,8 @@ addpath('../');
         error('A matrix has the wrong number of core types')
     end
 
-jobPrefs = jobPreferences()
-compPrefs = compPreferences()
-quotaArray = ones(1,size(jobPrefs,1))
+jobPrefs = jobPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
+compPrefs = compPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
+quotaArray = ones(1,size(compPrefs,1))
 
 resultMatrix = collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);

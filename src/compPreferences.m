@@ -1,6 +1,6 @@
 function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 
-    compPrefMatrix = []
+    compPrefMatrix = [];
     if nargin>=1 & nargin < 3
         error('Need exactly 3 arguments (Or no arguments for default values)')
     end
@@ -44,8 +44,8 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
 
     % Reformat compPrefMatrix to be input to collegeAdmissionsGame
     for x = 1:totalNumComps
-        [notUsed, compPrefFormatted] = sort(compPrefMatrix(x,:))
-        compPrefMatrix(x,:) = compPrefFormatted
+        [notUsed, compPrefFormatted] = sort(compPrefMatrix(x,:));
+        compPrefMatrix(x,:) = compPrefFormatted;
     end
 
 end
