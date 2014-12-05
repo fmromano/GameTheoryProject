@@ -49,3 +49,4 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
     end
 
 end
+
