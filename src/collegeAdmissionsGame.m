@@ -65,7 +65,7 @@ while allMatched == 0
             
             %Find out how each preference ranks compared to the others
             ranked = zeros(length(tempList));
-            for jLoop = 1:numInst
+            for jLoop = 1:numAppl
                 ranked(jLoop,:) = instPref == tempList(jLoop); 
             end
             
