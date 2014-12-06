@@ -1,7 +1,7 @@
-function [coreAvailabilityMatrix,matchedJob] = updateCoreAvailabilityMatrix(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix,matchingMatrix)
+function [coreAvailabilityMatrix,matchedJob,matchedComp] = updateCoreAvailabilityMatrix(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix,matchingMatrix)
 
-    coreAvailabilityMatrix = []
     if nargin>=1 & nargin < 4
+    coreAvailabilityMatrix = []
     error('Need exactly 3 arguments (Or no arguments for default values)')
     end
     if nargin == 0
@@ -86,6 +86,8 @@ function [coreAvailabilityMatrix,matchedJob] = updateCoreAvailabilityMatrix(core
             break
         end
     end
+
+    matchedComp = compOfJobMostCores;
             
 
 end

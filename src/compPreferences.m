@@ -38,14 +38,9 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
     compPrefMatrix = zeros(totalNumComps,totalNumJobs);
 
     [maxNumCoresSorted, jobsWithMostCores] = sort(maxNumCoresMatrix,'descend')
+
     for x = 1:totalNumComps
         compPrefMatrix(x,:) = jobsWithMostCores;
-    end
-
-    % Reformat compPrefMatrix to be input to collegeAdmissionsGame
-    for x = 1:totalNumComps
-        [notUsed, compPrefFormatted] = sort(compPrefMatrix(x,:));
-        compPrefMatrix(x,:) = compPrefFormatted;
     end
 
 end

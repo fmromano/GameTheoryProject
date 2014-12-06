@@ -46,11 +46,40 @@ addpath('../');
         error('A matrix has the wrong number of core types')
     end
 
-jobPrefs = jobPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
-compPrefs = compPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
-quotaArray = ones(1,size(compPrefs,1))
+    % Common variables
+    numComps = size(coreAvailabilityMatrix,1)
+    numJobs = size(maxNumCoresMatrix,2)
 
-resultMatrix = collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
+    % Matrix to store final matchings
+    finalMatchingMatrix = zeros(numComps,numJobs);
 
+% While there are still cores available and jobs to be matched
+while sum(sum(coreAvailabilityMatrix))>0 & sum(maxNumCoresMatrix)>0
+    jobPrefs = jobPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
+    compPrefs = compPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
+    quotaArray = ones(1,size(compPrefs,1))
 
+    % If a computer doesn't have any cores left, set its quota to zero
+    for x = 1:numComps
+        if sum(coreAvailabilityMatrix(x,:))==0
+            quotaArray(x) = 0
+        end
+    end
+
+    % Perform matching
+    [matchingMatrix, leftoverJobs, leftoverComps, leftoverQuota] = collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
+
+    % Find the most significant matching (the one with the job with most cores)
+    % and update the coreAvailabilityMatrix
+    [coreAvailabilityMatrix,matchedJob,matchedComp] = updateCoreAvailabilityMatrix(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix,matchingMatrix);
+
+    % When a job has been assigned to a computer, set its maxNumCores to zero to signify this
+    % This way, when doing the matching, it will be preferred the least compared with all other jobs
+    maxNumCoresMatrix(matchedJob) = 0;
+
+    % TODO: Record Final matchings
+    finalMatchingMatrix(matchedComp,matchedJob) = matchedJob;
+end
+
+finalMatchingMatrix
 
