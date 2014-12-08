@@ -7,6 +7,12 @@ if nargin>=1 & nargin < 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
 end
 if nargin == 0
+    resultMatrix = [1     0     0     0     0;...
+                    0     0     3     4     0;...
+                    0     0     0     0     0;...
+                    0     0     0     0     5;...
+                    0     2     0     0     0];
+    
     % The nth row is the nth computers list of number of cores of each type that are available.
     % The number of rows should be the number of computers.
     % The number of columns should be the number of types of cores.
@@ -35,9 +41,10 @@ end
 
 totalNumComps = size(coreAvailabilityMatrix,1);
 totalNumJobs = nnz(resultMatrix);
+[~,selectedJobs] = find(resultMatrix ~= 0);
 totalNumCoreTypes = size(speedMatrix,2);
 timeScores = zeros(2,totalNumJobs);
-[~,timeScores(1,:)] = find(resultMatrix ~= 0);
+timeScores(1,:) = selectedJobs;
 
 %Need to convert result matrix into what jobs have taken which resources,
 %then calculate their speed ratios similar to how the speeds were used for
@@ -45,31 +52,38 @@ timeScores = zeros(2,totalNumJobs);
 
 % For each job, calculate the total speed
 for compNum = 1:totalNumComps
-
-    for jobNum = 1:totalNumJobs
+    tmpCoreAvailabilityMatrix = coreAvailabilityMatrix;
+    processingPower = zeros(1,totalNumComps);
+    totalJobsPerComp = nnz(resultMatrix(compNum,:));
+    [~,jobList] = find(resultMatrix(compNum,:));
+    
+    for jobNum = 1:totalJobsPerComp
         coresAddedSoFar = 0;
         % Calculate relative speed at completing job
-        [sortedCoreSpeeds,coreTypeRanking] = sort(speedMatrix(jobNum,:),'descend') ;
+        [sortedCoreSpeeds,coreTypeRanking] = sort(speedMatrix(jobList(jobNum),:),'descend') ;
         for coreNum = 1:totalNumCoreTypes
             % Find the best core for this job
             nextBestCoreType = coreTypeRanking(coreNum);
             % Use all the cores of this type that the computer has available.
             while tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)>0
                 % For each core used, add its processing power to the total
-                processingPower(compNum) = processingPower(compNum) + speedMatrix(jobNum,nextBestCoreType);
+                processingPower(compNum) = processingPower(compNum) + speedMatrix(jobList(jobNum),nextBestCoreType);
                 coresAddedSoFar = coresAddedSoFar + 1;
                 % The core is no longer available so mark it as such.
                 tmpCoreAvailabilityMatrix(compNum,nextBestCoreType) = tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)-1;
                 % Stop if job has reached max number of cores
-                if coresAddedSoFar == maxNumCoresMatrix(jobNum)
+                if coresAddedSoFar == maxNumCoresMatrix(jobList(jobNum))
                     break
                 end
             end
             % Stop if job has reached max number of cores
-            if coresAddedSoFar == maxNumCoresMatrix(jobNum)
+            if coresAddedSoFar == maxNumCoresMatrix(jobList(jobNum))
                 break
             end
         end
+        
+        timeScores(2,jobList(jobNum)) = processingPower(compNum);
+        processingPower(compNum) = 0;
     end
 
 end
