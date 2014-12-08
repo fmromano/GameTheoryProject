@@ -59,3 +59,6 @@ end
 %Output the matches, leftovers, and efficiency (will be used to see how
 %well this method works).
 resultMatrix
+
+[timeScores] = speedCalc(resultMatrix, ...
+    coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
