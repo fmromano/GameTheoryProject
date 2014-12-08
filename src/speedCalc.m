@@ -1,7 +1,12 @@
 function [timeScores] = speedCalc(resultMatrix, ...
     coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 %For a given setup, calculate how fast it will take to complete this set of
-%jobs.
+%jobs.  Useful if compared to multiple test cases.  Besides that, this
+%number may seem like gibberish.  The scores are derived the same way job
+%preferences were created.
+
+%To do:  1.  Create a cores used by job X matrix. This setup is currently 
+%computed based on the original number of cores.
 if nargin>=1 & nargin < 4
     coreAvailabilityMatrix = []
     error('Need exactly 3 arguments (Or no arguments for default values)')
