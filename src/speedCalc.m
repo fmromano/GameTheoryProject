@@ -1,4 +1,4 @@
-function [timeToCompletion] = speedCalc(resultMatrix, ...
+function [timeScores] = speedCalc(resultMatrix, ...
     coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 %For a given setup, calculate how fast it will take to complete this set of
 %jobs.
@@ -16,7 +16,7 @@ if nargin == 0
     14, 8, 2; ...
     23, 12, 18,; ...
     5, 25, 13,; ...
-    ]
+    ];
     % The nth row is the nth job's list of speed ratios for the each core type.
     % The number of rows should be the number of jobs.
     % The number of columns should be the number of types of cores.
@@ -26,29 +26,27 @@ if nargin == 0
     1, 28, 42; ...
     20, 22, 1,; ...
     25, 2, 16,; ...
-    ]
+    ];
     % The nth element is the max number of cores that can be used by job n.
     % The number of columns should be the number of jobs.
-    maxNumCoresMatrix = [8,20,10,1,50]
+    maxNumCoresMatrix = [8,20,10,1,50];
     
 end
 
-totalNumComps = size(coreAvailabilityMatrix,1)
-totalNumJobs = size(speedMatrix,1)
-totalNumCoreTypes = size(speedMatrix,2)
+totalNumComps = size(coreAvailabilityMatrix,1);
+totalNumJobs = nnz(resultMatrix);
+totalNumCoreTypes = size(speedMatrix,2);
+timeScores = zeros(2,totalNumJobs);
+[~,timeScores(1,:)] = find(resultMatrix ~= 0);
 
-% Initialize Returned Preference Matrix
-% Each row is a job's ranking of the computers by preference.
-% 1 means most preferred.
-jobPrefMatrix = zeros(totalNumJobs,totalNumComps);
+%Need to convert result matrix into what jobs have taken which resources,
+%then calculate their speed ratios similar to how the speeds were used for
+%the job preference matrices.
 
+% For each job, calculate the total speed
+for compNum = 1:totalNumComps
 
-% For each job, 
-for jobNum = 1:totalNumJobs
-    tmpCoreAvailabilityMatrix = coreAvailabilityMatrix;
-    processingPower = zeros(1,totalNumComps);
-    % For each computer
-    for compNum = 1:totalNumComps
+    for jobNum = 1:totalNumJobs
         coresAddedSoFar = 0;
         % Calculate relative speed at completing job
         [sortedCoreSpeeds,coreTypeRanking] = sort(speedMatrix(jobNum,:),'descend') ;
