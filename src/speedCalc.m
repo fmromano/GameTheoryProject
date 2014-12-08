@@ -88,7 +88,9 @@ for compNum = 1:totalNumComps
                 end
             end
 
-            timeScores(2,jobList(jobNum)) = processingPower(compNum);
+            jobIndex = find(jobList(jobNum) == timeScores(1,:));
+            
+            timeScores(2,jobIndex) = processingPower(compNum);
             processingPower(compNum) = 0;
         end
     end
