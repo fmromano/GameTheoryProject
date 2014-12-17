@@ -525,7 +525,16 @@ indifference, and no externalities.
 Things to do:  Write the math and assumptions, state why
 we are doing this, and show that this will be stable as well.
 
-
+\subsubsection{Stability of Algorithm}
+The proposed algorithm produces a stable matching because in
+each iteration, the college admissions game is used to find
+a set of stable matchings.
+Out of the jobs listed in the resultant set of stable matchings,
+the job that can use the most processors is preferred most
+by every computer. Thus, that job will be matched with its first 
+choice and its matching to a computer is a stable matching.
+Thus, each pair produced by an iteration of the proposed
+algorithm is stable and therefore the final matching is stable.
 
 
 
