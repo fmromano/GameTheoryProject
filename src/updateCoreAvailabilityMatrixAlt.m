@@ -1,6 +1,9 @@
 function [coreAvailabilityMatrix] = updateCoreAvailabilityMatrixAlt(coreAvailabilityMatrix,...
     speedMatrix,maxNumCoresMatrix,resultVector,currentComp)
 
+%An alternate version of the updateCoreAvailabilityMatrix function.  This
+%function just reduces the number of cores used each round.
+
 totalNumComps = length(currentComp);
 totalNumJobs = nnz(resultVector);
 selectedJobs = unique(resultVector);

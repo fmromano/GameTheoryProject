@@ -56,16 +56,16 @@ elseif nargin<=2 || nargin > 4
 end
 
 totalNumComps = size(coreAvailabilityMatrix,1);
-totalNumJobs = nnz(resultMatrix);
+totalNumSelectedJobs = nnz(resultMatrix);
+totalNumJobs = size(resultMatrix,2);
 selectedJobs = unique(resultMatrix);
 if selectedJobs(1) == 0
     selectedJobs = selectedJobs(2:end);
 end
 totalNumCoreTypes = size(speedMatrix,2);
 rawTimeScores = zeros(2,totalNumJobs);
-rawTimeScores(1,:) = selectedJobs;
-threadsLeft = rawTimeScores;
-threadsLeft(2,:) = 1;
+rawTimeScores(1,:) = 1:totalNumJobs;
+threadsLeft = [1:length(maxNumCoresMatrix);maxNumCoresMatrix];
 
 %Need to convert result matrix into what jobs have taken which resources,
 %then calculate their speed ratios similar to how the speeds were used for
@@ -131,6 +131,8 @@ end
 rawTimeScores;
 threadsLeft;
 
+jobList = selectedJobs;
+
 percentThreadsUsed = zeros(size(maxNumCoresMatrix));
 percentThreadsUsed(:) = 100;
 for mLoop = 1:length(maxNumCoresMatrix)
@@ -143,9 +145,10 @@ end
 percentThreadsUsed = percentThreadsUsed./100;
 
 adjustedTimeScores = zeros(size(percentThreadsUsed));
-for nLoop = 1:length(maxNumCoresMatrix)
-    adjustedTimeScores(nLoop) = rawTimeScores(2,nLoop).*...
-        percentThreadsUsed(nLoop);
+for nLoop = 1:length(jobList)
+    jobIndex = find(jobList(nLoop) == threadsLeft(1,:));
+    adjustedTimeScores(jobIndex) = rawTimeScores(2,jobIndex).*...
+        percentThreadsUsed(jobIndex);
 end
 
 adjustedTimeScores
