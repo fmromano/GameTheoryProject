@@ -7,10 +7,10 @@ function [timeScores] = speedCalc(resultMatrix, ...
 
 %To do:  1.  Create a cores used by job X matrix. This setup is currently 
 %computed based on the original number of cores.
-if nargin>=1 & nargin < 4
-    coreAvailabilityMatrix = []
+if nargin>=1 && nargin < 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
 end
+
 if nargin == 0
     resultMatrix = [1     0     0     0     0;...
                     0     0     3     4     0;...
@@ -25,8 +25,8 @@ if nargin == 0
     8, 7, 6; ...
     1, 23, 3; ...
     14, 8, 2; ...
-    23, 12, 18,; ...
-    5, 25, 13,; ...
+    23, 12, 10,; ...
+    5, 0, 13,; ...
     ];
     % The nth row is the nth job's list of speed ratios for the each core type.
     % The number of rows should be the number of jobs.
@@ -53,6 +53,8 @@ end
 totalNumCoreTypes = size(speedMatrix,2);
 timeScores = zeros(2,totalNumJobs);
 timeScores(1,:) = selectedJobs;
+threadsLeft = timeScores;
+threadsLeft(2,:) = 1;
 
 %Need to convert result matrix into what jobs have taken which resources,
 %then calculate their speed ratios similar to how the speeds were used for
@@ -65,35 +67,48 @@ for compNum = 1:totalNumComps
     totalJobsPerComp = nnz(resultMatrix(compNum,:));
     jobList = nonzeros(resultMatrix(compNum,:));
     
+    
+    
     if totalJobsPerComp == 0
         %do nothing
     else
         for jobNum = 1:totalJobsPerComp
             coresAddedSoFar = 0;
             % Calculate relative speed at completing job
-            [sortedCoreSpeeds,coreTypeRanking] = sort(speedMatrix(jobList(jobNum),:),'descend') ;
+            [~,coreTypeRanking] = ...
+                sort(speedMatrix(jobList(jobNum),:),'descend') ;
+            
+            jobIndex = find(jobList(jobNum) == timeScores(1,:));
+            
             for coreNum = 1:totalNumCoreTypes
                 % Find the best core for this job
                 nextBestCoreType = coreTypeRanking(coreNum);
                 % Use all the cores of this type that the computer has available.
                 while tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)>0
                     % For each core used, add its processing power to the total
-                    processingPower(compNum) = processingPower(compNum) + speedMatrix(jobList(jobNum),nextBestCoreType);
+                    processingPower(compNum) = processingPower(compNum) + ...
+                        speedMatrix(jobList(jobNum),nextBestCoreType);
                     coresAddedSoFar = coresAddedSoFar + 1;
                     % The core is no longer available so mark it as such.
-                    tmpCoreAvailabilityMatrix(compNum,nextBestCoreType) = tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)-1;
+                    tmpCoreAvailabilityMatrix(compNum,nextBestCoreType) = ...
+                        tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)-1;
                     % Stop if job has reached max number of cores
                     if coresAddedSoFar == maxNumCoresMatrix(jobList(jobNum))
+                        threadsLeft(2,jobIndex) = 0;
                         break
                     end
                 end
-                % Stop if job has reached max number of cores
-                if coresAddedSoFar == maxNumCoresMatrix(jobList(jobNum))
-                    break
+%                 % Stop if job has reached max number of cores
+%                 if coresAddedSoFar == maxNumCoresMatrix(jobList(jobNum))
+%                     threadsLeft(2,jobIndex) = 0;
+%                     break
+%                 end
+%               
+                if threadsLeft(2,jobIndex) ~= 0
+                threadsLeft(2,jobIndex) = maxNumCoresMatrix(jobList(jobNum)) - ...
+                    coresAddedSoFar;
                 end
             end
-
-            jobIndex = find(jobList(jobNum) == timeScores(1,:));
             
             timeScores(2,jobIndex) = processingPower(compNum);
             processingPower(compNum) = 0;
@@ -102,7 +117,7 @@ for compNum = 1:totalNumComps
 
 end
 
-
-
+timeScores
+threadsLeft
 
 end %function
