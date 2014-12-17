@@ -562,6 +562,36 @@ that significantly outperform those availabl at other
 computers and this computer does not meet either 
 of conditions i) or ii) listed above.
 
+\underline{Total Job Completion Time}:
+The total computation time, i.e., the 
+sum of total computation times for each job,
+is another good measure of the optimality 
+of the proposed algorithm.
+
+Assuming individual jobs cannot take advantage
+of processors previously used by other jobs
+that have completed, 
+the proposed algorithm minimizes total 
+computation time whenever 
+jobs that use more processors are jobs that would take 
+longer to complete than any other job. 
+By 'take longer to complete', we mean take longer than
+other jobs if the other jobs were to use a subset or 
+superset of the processors used by the first job.
+When this condition is met, the job that takes the
+longest is given the greatest speed possible, the job that 
+takes the 2nd longest is given the next greatest speed 
+possible for it, and so on. 
+Thus, total computation time is minimized.
+
+In the proposed algorithm, this condition that jobs use
+more processors take longer is not guaranteed.
+However, it is strongly encouraged by the 
+proportional fairness of the algorithm:
+Jobs that would take longer to complete are incentivized
+to be able to use more processors.
+
+
 
 
 
