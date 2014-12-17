@@ -1,0 +1,7 @@
+# Ignore matlab Environment Files
+*.asv
+# Ignore vim swap files
+*.swp
+# Ignore temporary latex files
+*.aux
+*.log
