@@ -536,6 +536,33 @@ choice and its matching to a computer is a stable matching.
 Thus, each pair produced by an iteration of the proposed
 algorithm is stable and therefore the final matching is stable.
 
+\subsubsection{Optimality of Algorithm}
+Whether the matching is optimal can be understood in multiple senses.
+In this section, three different approaches to optimality are 
+discussed as they apply to the proposed algorithm.
+
+\underline{Resource Utilization}:
+A simple goal of the proposed algorithm would be to 
+maximize processor utiliztion so that no computing 
+resources go unused/wasted.
+
+The proposed algorithm does not alway maximize processor 
+utilization. However, it does in every iteration 
+where the preferred computer of the job with
+the greatest possible processor utilization
+has at least as many processors 
+available as either
+    i) that job can use or
+    ii) any other computer has.
+This situation is common because, often, a computer with more 
+available processor will outperform
+one with fewer. The exceptions occurs where there is 
+a computer that has special purpose procesors
+that significantly outperform those availabl at other 
+computers and this computer does not meet either 
+of conditions i) or ii) listed above.
+
+
 
 
 \section{Results and Discussion}
