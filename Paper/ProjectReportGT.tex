@@ -170,7 +170,7 @@
 
 % *** MATH PACKAGES ***
 %
-%\usepackage[cmex10]{amsmath}
+\usepackage[cmex10]{amsmath}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics. If using
 % it, be sure to load this package with the cmex10 option to ensure that
@@ -591,6 +591,40 @@ proportional fairness of the algorithm:
 Jobs that would take longer to complete are incentivized
 to be able to use more processors.
 
+\underline{Proportoinal Fairness}:
+In the proposed algorithm, jobs' individual computation
+times/total required processing are not factored into
+the preferences and so have no bearing on the matchings.
+Instead, it is the processor utilization ability of 
+a job that effects its ranking. This leads to a proportional
+fairness in which jobs that are shorter are still given 
+a fair amount of processing power so that they will not take
+very long. 
+On the other hand, jobs that
+require more processing power, i.e. would take longer,
+are incentivized to be able to use more pocessors than 
+jobs that do not take as long.
+
+For a job that would take time to complete 
+\(\tau_1 > \tau_2\), where \(\tau_2\) is the
+completion time for a second job,
+Job 1 would reduce its completion time by an 
+absolute amount 
+\(\Delta \tau_1 = \tau_1-\frac{\tau_1}{f}\) 
+if it could increase its speed by a factor \(f\).
+Similarly, for Job 2, 
+\(\Delta \tau_2 = \tau_2-\frac{\tau_2}{f}\).
+Thus, 
+\(\tau_1=\Delta \tau_1(1-\frac{1}{f})\)
+and
+\(\tau_2=\Delta \tau_2(1-\frac{1}{f})\).
+Since 
+\(\tau_1 > \tau_2\), we have
+\(\frac{\Delta\tau_1}{1-\frac{1}{f}} > \frac{\Delta\tau_2}{1-\frac{1}{f}}\) 
+\(\implies \Delta \tau_1 > \Delta \tau_2\).
+Therefore, Job 1 has more to gain by increasing its speed by 
+a given factor than Job 2 does and so Job 1 has a greater incentive
+to be able to use more processors.
 
 
 
