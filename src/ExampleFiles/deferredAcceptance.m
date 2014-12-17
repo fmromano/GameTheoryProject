@@ -49,9 +49,9 @@ jobPrefs = jobPreferences(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 compPrefs = compPreferences(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 numJobs = length(maxNumCoresMatrix);
 numComps = length(coreAvailabilityMatrix(:,1));
-%maxJobsPerComp = ceil(numJobs/numComps);
+maxJobsPerComp = ceil(numJobs/numComps);
 quotaArray = ones(1,numComps);
-quotaArray(:) = numJobs;
+quotaArray(:) = maxJobsPerComp;
 
 
 resultMatrix = collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
