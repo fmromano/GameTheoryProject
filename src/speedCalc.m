@@ -1,4 +1,5 @@
-function [timeScores] = speedCalc(resultMatrix, ...
+function [rawTimeScores,percentThreadsUsed,adjustedTimeScores] = ...
+    speedCalc(resultMatrix, ...
     coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 %For a given setup, calculate how fast it will take to complete this set of
 %jobs.  Useful if compared to multiple test cases.  Besides that, this
@@ -25,8 +26,8 @@ if nargin == 0
     8, 7, 6; ...
     1, 23, 3; ...
     14, 8, 2; ...
-    23, 12, 10,; ...
-    5, 0, 13,; ...
+    23, 8, 10,; ...
+    5, 0, 10,; ...
     ];
     % The nth row is the nth job's list of speed ratios for the each core type.
     % The number of rows should be the number of jobs.
@@ -51,9 +52,9 @@ if selectedJobs(1) == 0
     selectedJobs = selectedJobs(2:end);
 end
 totalNumCoreTypes = size(speedMatrix,2);
-timeScores = zeros(2,totalNumJobs);
-timeScores(1,:) = selectedJobs;
-threadsLeft = timeScores;
+rawTimeScores = zeros(2,totalNumJobs);
+rawTimeScores(1,:) = selectedJobs;
+threadsLeft = rawTimeScores;
 threadsLeft(2,:) = 1;
 
 %Need to convert result matrix into what jobs have taken which resources,
@@ -78,7 +79,7 @@ for compNum = 1:totalNumComps
             [~,coreTypeRanking] = ...
                 sort(speedMatrix(jobList(jobNum),:),'descend') ;
             
-            jobIndex = find(jobList(jobNum) == timeScores(1,:));
+            jobIndex = find(jobList(jobNum) == rawTimeScores(1,:));
             
             for coreNum = 1:totalNumCoreTypes
                 % Find the best core for this job
@@ -110,14 +111,32 @@ for compNum = 1:totalNumComps
                 end
             end
             
-            timeScores(2,jobIndex) = processingPower(compNum);
+            rawTimeScores(2,jobIndex) = processingPower(compNum);
             processingPower(compNum) = 0;
         end
     end
 
 end
 
-timeScores
+rawTimeScores
 threadsLeft
 
+percentThreadsUsed = zeros(size(maxNumCoresMatrix));
+percentThreadsUsed(:) = 100;
+for mLoop = 1:length(maxNumCoresMatrix)
+    if threadsLeft(2,mLoop) ~= 0
+        percentThreadsUsed(mLoop) = 100*((maxNumCoresMatrix(mLoop)-...
+            threadsLeft(2,mLoop))/maxNumCoresMatrix(mLoop));
+    end
+end
+
+percentThreadsUsed = percentThreadsUsed./100
+
+adjustedTimeScores = zeros(size(percentThreadsUsed));
+for nLoop = 1:length(maxNumCoresMatrix)
+    adjustedTimeScores(nLoop) = rawTimeScores(2,nLoop).*...
+        percentThreadsUsed(nLoop);
+end
+
+adjustedTimeScores
 end %function
