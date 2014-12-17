@@ -1,4 +1,4 @@
-function [averageTimeScores,percentJobsAssigned] = ...
+function [aveTimeScores,perJobsAssigned, avePerUsedThreads] = ...
     comparisonFunction(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix)
 %Comparison between methods 
 
@@ -10,12 +10,16 @@ function [averageTimeScores,percentJobsAssigned] = ...
     speedMatrix, maxNumCoresMatrix);
 [rawTimeScoresSM,percentThreadsUsedSM,adjustedTimeScoresSM] = ...
     speedCalc(resultMatrixSM, coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix);
+[resourceScoresSM,perCoresUsedSM] = resourceCalc(resultMatrixSM,...
+    coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 
 %Deferred Acceptance with quotas = TotalNumberOfJobs/TotalNumberOfComputers
 [resultMatrixDA1] = deferredAcceptance(coreAvailabilityMatrix, ...
     speedMatrix, maxNumCoresMatrix);
 [rawTimeScoresDA1,percentThreadsUsedDA1,adjustedTimeScoresDA1] = ...
     speedCalc(resultMatrixDA1, coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix);
+[resourceScoresDA1,perCoresUsedDA1] = resourceCalc(resultMatrixSM,...
+    coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 
 %Deferred Acceptance where matchings are based on the number of cores
 %available
@@ -23,30 +27,47 @@ function [averageTimeScores,percentJobsAssigned] = ...
     speedMatrix, maxNumCoresMatrix);
 [rawTimeScoresDA2,percentThreadsUsedDA2,adjustedTimeScoresDA2] = ...
     speedCalc(resultMatrixDA2, coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix);
+[resourceScoresDA2,perCoresUsedDA2] = resourceCalc(resultMatrixSM,...
+    coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 
 %Deferred Acceptance where each round is looking for a best match
 [resultMatrixPA] = proposedAlgorithm(coreAvailabilityMatrix, ...
     speedMatrix, maxNumCoresMatrix);
 [rawTimeScoresPA,percentThreadsUsedPA,adjustedTimeScoresPA] = ...
     speedCalc(resultMatrixPA, coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix);
+[resourceScoresPA,perCoresUsedPA] = resourceCalc(resultMatrixSM,...
+    coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 
 %% Compile the results
-allPercents = [percentThreadsUsedSM;percentThreadsUsedDA1;percentThreadsUsedDA2;percentThreadsUsedPA];
-allRawScores = [rawTimeScoresSM(2,:);rawTimeScoresDA1(2,:);rawTimeScoresDA2(2,:);rawTimeScoresPA(2,:)];
-allScores = [adjustedTimeScoresSM;adjustedTimeScoresDA1;adjustedTimeScoresDA2;adjustedTimeScoresPA];
+allPercents = [percentThreadsUsedSM;...
+               percentThreadsUsedDA1;...
+               percentThreadsUsedDA2;...
+               percentThreadsUsedPA];
+allRawScores = [rawTimeScoresSM(2,:);...
+                rawTimeScoresDA1(2,:);...
+                rawTimeScoresDA2(2,:);...
+                rawTimeScoresPA(2,:)];
+allScores = [adjustedTimeScoresSM;...
+             adjustedTimeScoresDA1;...
+             adjustedTimeScoresDA2;...
+             adjustedTimeScoresPA];
 
-percentJobsAssigned = zeros(4,1);
+perJobsAssigned = zeros(4,1);
 totalJobs = length(maxNumCoresMatrix);
+avePerUsedThreads = perJobsAssigned;
 
-for iLoop = 1:length(percentJobsAssigned)
-    percentJobsAssigned(iLoop) = nnz(allPercents(iLoop,:))/totalJobs;
+for iLoop = 1:length(perJobsAssigned)
+    perJobsAssigned(iLoop) = nnz(allPercents(iLoop,:))/totalJobs;
 end
 
-averageTimeScores = zeros(4,1);
+aveTimeScores = zeros(4,1);
 
-for jLoop = 1:length(averageTimeScores)
-    averageTimeScores(jLoop) = mean(nonzeros(allScores(jLoop,:)));
+for jLoop = 1:length(aveTimeScores)
+    aveTimeScores(jLoop) = mean(nonzeros(allScores(jLoop,:)));
     
 end
 
+for kLoop = 1:length(avePerUsedThreads)
+    avePerUsedThreads(kLoop) = mean(nonzeros(allPercents(kLoop,:)));
+end
 end %of function
