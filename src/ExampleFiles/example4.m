@@ -58,7 +58,7 @@ while sum(sum(coreAvailabilityMatrix))>0 & sum(maxNumCoresMatrix)>0
     % This way, when doing the matching, it will be preferred the least compared with all other jobs
     maxNumCoresMatrix(matchedJob) = 0;
 
-    % TODO: Record Final matchings
+    % Record Final matchings
     finalMatchingMatrix(matchedComp,matchedJob) = matchedJob;
 end
 

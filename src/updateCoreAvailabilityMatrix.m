@@ -48,7 +48,7 @@ function [coreAvailabilityMatrix,matchedJob,matchedComp] = updateCoreAvailabilit
         error('There is no one matched!')
     end
 
-    % TODO FIXME: Be sure that when calling CollegeAdmissionsGame, 
+    %!!! Be sure that when calling CollegeAdmissionsGame, 
     % if a computer doesn't have any cores left, then to set its quota to 0.
 
     % Of the jobs that were matched, which uses the most cores?
