@@ -343,103 +343,7 @@
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
 
-
-% correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
-
-
-\begin{document}
-%
-% paper title
-% can use linebreaks \\ within to get better formatting as desired
-\title{Matching Theory and Virtual Machines}
-
-
-% author names and affiliations
-% use a multiple column layout for up to three different
-% affiliations
-\author{\IEEEauthorblockN{Kristen Hines}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Virginia Tech\\
-Email: kphines@vt.edu}
-\and
-\IEEEauthorblockN{Ferdinando Romano}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Virginia Tech\\
-Email: Please Insert}}
-
-
-% Make the title area
-\maketitle
-
-
-%Abstract of the paper.
-\begin{abstract}
-%\boldmath
-Insert abstract here.
-\end{abstract}
-
-
-\section{Introduction}
-This project is focused on applying matching theory to a 
-virtual machine job assignment problem.  
-
-%Example formating
-%\hfill mds
-%
-%\hfill January 11, 2007
-%
-%\subsection{Subsection Heading Here}
-%Subsection text here.
-%
-%
-%\subsubsection{Subsubsection Heading Here}
-%Subsubsection text here.
-
-\section{Related Work}
-Most similar topics:  VM Cosheduling and 
-VM Migration papers.
-
-Related to VM Coscheduling: Distributed Selfish Load
-Balancing
-
-Related to VM Migration:  Seen As Stable Marriage and
-Online VM Shuffling (continuation of VM Migration work).
-
-\section{Method Description}
-High level description if needed.
-\subsection{Problem Formulation}
-The problem this paper is exploring is how to optimize job 
-assigment to separate computer clusters.  Each of these
-jobs perform differently on different cores types.  These
-core types can be graphical processors, computational
-processors, or something else.  Each of these clusters
-have different core types.  Each job can only be divided into
-a finite number of threads, and each job is assigned to 
-one computer at a time.
-
-(probably a good place to introduce matching theory
-and the college admissions game).
-This problem can be formed as a college admissions
-game.  The differences are that the institutions
-have multiple quotas, each applicant can fill multiple
-slots of different types, applicants prefer different
-slot types over others, and an applicant cannot be
-divided among multiple institutions.
-
-Key assumptions for this problem are:  the virtual machines
-will be treated like flexible computers, jobs are submitted at
-the same time, chosen jobs are completed simulatenously,
-unchosen jobs will be submitted with the next round, no
-indifference, and no externalities.
-
-\subsection{Proposed Algorithm}
-Things to do:  Write the math and assumptions, state why
-we are doing this, and show that this will be stable as well.
-
-
-
-
+%Examples of how to insert figures and subsections
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -515,6 +419,20 @@ we are doing this, and show that this will be stable as well.
 %\end{tabular}
 %\end{table}
 
+%Example formating
+%\hfill mds
+%
+%\hfill January 11, 2007
+%
+%\subsection{Subsection Heading Here}
+%Subsection text here.
+%
+%
+%\subsubsection{Subsubsection Heading Here}
+%Subsubsection text here.
+
+%End of the examples (I wanted them out of the main paper)
+
 
 % Note that IEEE does not put floats in the very first column - or typically
 % anywhere on the first page for that matter. Also, in-text middle ("here")
@@ -522,6 +440,95 @@ we are doing this, and show that this will be stable as well.
 % exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
 % footnotes above bottom floats. This can be corrected via the \fnbelowfloat
 % command of the stfloats package.
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Matching Theory and Virtual Machines}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Kristen Hines}
+\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
+Virginia Tech\\
+Email: kphines@vt.edu}
+\and
+\IEEEauthorblockN{Ferdinando Romano}
+\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
+Virginia Tech\\
+Email: Please Insert}}
+
+
+% Make the title area
+\maketitle
+
+
+%Abstract of the paper.
+\begin{abstract}
+%\boldmath
+Insert abstract here.
+\end{abstract}
+
+
+\section{Introduction}
+This project is focused on applying matching theory to a 
+virtual machine job assignment problem.  
+
+
+
+\section{Related Work}
+Most similar topics:  VM Cosheduling and 
+VM Migration papers.
+
+Related to VM Coscheduling: Distributed Selfish Load
+Balancing
+
+Related to VM Migration:  Seen As Stable Marriage and
+Online VM Shuffling (continuation of VM Migration work).
+
+\section{Method Description}
+High level description if needed.
+\subsection{Problem Formulation}
+The problem this paper is exploring is how to optimize job 
+assigment to separate computer clusters.  Each of these
+jobs perform differently on different cores types.  These
+core types can be graphical processors, computational
+processors, or something else.  Each of these clusters
+have different core types.  Each job can only be divided into
+a finite number of threads, and each job is assigned to 
+one computer at a time.
+
+(probably a good place to introduce matching theory
+and the college admissions game).
+This problem can be formed as a college admissions
+game.  The differences are that the institutions
+have multiple quotas, each applicant can fill multiple
+slots of different types, applicants prefer different
+slot types over others, and an applicant cannot be
+divided among multiple institutions.
+
+Key assumptions for this problem are:  the virtual machines
+will be treated like flexible computers, jobs are submitted at
+the same time, chosen jobs are completed simulatenously,
+unchosen jobs will be submitted with the next round, no
+indifference, and no externalities.
+
+\subsection{Proposed Algorithm}
+Things to do:  Write the math and assumptions, state why
+we are doing this, and show that this will be stable as well.
+
+
+
+
+
 \section{Results and Discussion}
 Show results and discuss what they represent.
 
