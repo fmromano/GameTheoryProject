@@ -116,8 +116,5 @@ while sum(sum(coreAvailabilityMatrix))>0 && sum(maxNumCoresMatrix)>0
     
 end
 
-<<<<<<< HEAD
 resultMatrix = finalMatchingMatrix;
-=======
-finalMatchingMatrix
->>>>>>> origin/master
+
