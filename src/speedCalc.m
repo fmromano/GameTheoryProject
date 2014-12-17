@@ -151,5 +151,5 @@ for nLoop = 1:length(jobList)
         percentThreadsUsed(jobIndex);
 end
 
-adjustedTimeScores
+adjustedTimeScores;
 end %function
