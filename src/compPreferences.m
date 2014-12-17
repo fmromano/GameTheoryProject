@@ -1,7 +1,7 @@
 function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 
     compPrefMatrix = [];
-    if nargin>=1 & nargin < 3
+    if nargin>=1 && nargin < 3
         error('Need exactly 3 arguments (Or no arguments for default values)')
     end
     if nargin == 0
@@ -14,7 +14,7 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
                         14,  8, 2; ...
                         23, 12, 18,; ...
                         5, 25,  13,; ...
-                      ]
+                      ];
 
         % The nth row is the nth job's list of speed ratios for the each core type.
         % The number of rows should be the number of jobs.
@@ -25,19 +25,19 @@ function compPrefMatrix = compPreferences(coreAvailabilityMatrix, speedMatrix, m
                         1,  28, 42; ... 
                         20, 22, 1,; ... 
                         25, 2,  16,; ...
-                      ]
+                      ];
 
         % The nth element is the max number of cores that can be used by job n.
         % The number of columns should be the number of jobs.
-        maxNumCoresMatrix = [8,20,10,1,50]
+        maxNumCoresMatrix = [8,20,10,1,50];
     end
 
-    totalNumComps = size(coreAvailabilityMatrix,1)
-    totalNumJobs = size(maxNumCoresMatrix,2)
+    totalNumComps = size(coreAvailabilityMatrix,1);
+    totalNumJobs = size(maxNumCoresMatrix,2);
 
     compPrefMatrix = zeros(totalNumComps,totalNumJobs);
 
-    [maxNumCoresSorted, jobsWithMostCores] = sort(maxNumCoresMatrix,'descend')
+    [maxNumCoresSorted, jobsWithMostCores] = sort(maxNumCoresMatrix,'descend');
 
     for x = 1:totalNumComps
         compPrefMatrix(x,:) = jobsWithMostCores;

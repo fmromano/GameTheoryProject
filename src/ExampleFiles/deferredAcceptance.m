@@ -1,12 +1,6 @@
-function [resultMatrix] = simpleMatching(coreAvailabilityMatrix, ...
+function [resultMatrix] = deferredAcceptance(coreAvailabilityMatrix,...
     speedMatrix, maxNumCoresMatrix)
-%Simple Match function
-%All jobs will be matched based on preferences only.
-
-%Initialize computer preferences and job preferences.
-
-%Output the matches, leftovers, and efficiency (will be used to see how
-%well this method works).
+%Deferred Acceptance 1
 
 if nargin<=1 && nargin > 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
@@ -51,25 +45,15 @@ if nargin == 0
 maxNumCoresMatrix = [8,20,10,4,1,3,27,14,50,8,40,13,4,18,30];%,58,32,33,41,14,21]
 end %if nargin == 0
 
-%Matchings jobs and computers based on job preference only.  This is a
-%waiting list setup.  Matched based on first preferences.
 jobPrefs = jobPreferences(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
+compPrefs = compPreferences(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
+numJobs = length(maxNumCoresMatrix);
+numComps = length(coreAvailabilityMatrix(:,1));
+%maxJobsPerComp = ceil(numJobs/numComps);
+quotaArray = ones(1,numComps);
+quotaArray(:) = numJobs;
 
-[preferredComputer,jobNumber] = sort(jobPrefs(:,1));
-[chosenComputers,numJobs] = count_unique(preferredComputer);
 
-resultMatrix = zeros(size(jobPrefs))';
-for iLoop = 1:length(chosenComputers)
-    for jLoop = 1:numJobs(iLoop)
-        resultMatrix(chosenComputers(iLoop),jLoop) = jobNumber(jLoop);
-    end
-    
-    jobNumber = jobNumber((numJobs(iLoop)+1):end);
-    if isempty(jobNumber)
-        break
-    end
-end
+resultMatrix = collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
 
-%Output the matches, leftovers, and efficiency (will be used to see how
-%well this method works).
-resultMatrix;
+end %end of function
