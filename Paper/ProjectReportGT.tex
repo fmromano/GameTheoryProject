@@ -397,11 +397,46 @@ virtual machine job assignment problem.
 %Subsubsection text here.
 
 \section{Related Work}
-Describe related work.
+Most similar topics:  VM Cosheduling and 
+VM Migration papers.
+
+Related to VM Coscheduling: Distributed Selfish Load
+Balancing
+
+Related to VM Migration:  Seen As Stable Marriage and
+Online VM Shuffling (continuation of VM Migration work).
 
 \section{Method Description}
 High level description if needed.
 \subsection{Problem Formulation}
+The problem this paper is exploring is how to optimize job 
+assigment to separate computer clusters.  Each of these
+jobs perform differently on different cores types.  These
+core types can be graphical processors, computational
+processors, or something else.  Each of these clusters
+have different core types.  Each job can only be divided into
+a finite number of threads, and each job is assigned to 
+one computer at a time.
+
+(probably a good place to introduce matching theory
+and the college admissions game).
+This problem can be formed as a college admissions
+game.  The differences are that the institutions
+have multiple quotas, each applicant can fill multiple
+slots of different types, applicants prefer different
+slot types over others, and an applicant cannot be
+divided among multiple institutions.
+
+Key assumptions for this problem are:  the virtual machines
+will be treated like flexible computers, jobs are submitted at
+the same time, chosen jobs are completed simulatenously,
+unchosen jobs will be submitted with the next round, no
+indifference, and no externalities.
+
+\subsection{Proposed Algorithm}
+Things to do:  Write the math and assumptions, state why
+we are doing this, and show that this will be stable as well.
+
 
 
 
