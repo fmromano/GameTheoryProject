@@ -3,7 +3,7 @@ function [resourceScores] = resourceCalc(resultMatrix, ...
 %The purpose of this function is to see how efficiently the resources are
 %distributed.
 
-if nargin>=1 && nargin < 4
+if nargin<=2 && nargin > 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
 end
 

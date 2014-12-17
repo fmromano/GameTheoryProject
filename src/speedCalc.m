@@ -18,10 +18,6 @@ function [rawTimeScores,percentThreadsUsed,adjustedTimeScores] = ...
 %the time score for that job is reduced to 50% of what it could be.
 
 %To do:  1.  Test this between different schemes.
-if nargin<=2 || nargin > 4
-    error('Need exactly 3 arguments (Or no arguments for default values)')
-end
-
 if nargin == 0
     
     %This setup is completely arbitrary and may not be stable.
@@ -55,6 +51,8 @@ if nargin == 0
     % The number of columns should be the number of jobs.
     maxNumCoresMatrix = [8,20,10,1,50];
     
+elseif nargin<=2 || nargin > 4
+    error('Need exactly 3 arguments (Or no arguments for default values)')
 end
 
 totalNumComps = size(coreAvailabilityMatrix,1);
@@ -130,8 +128,8 @@ for compNum = 1:totalNumComps
 
 end
 
-rawTimeScores
-threadsLeft
+rawTimeScores;
+threadsLeft;
 
 percentThreadsUsed = zeros(size(maxNumCoresMatrix));
 percentThreadsUsed(:) = 100;

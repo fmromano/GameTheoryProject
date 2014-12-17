@@ -105,7 +105,7 @@ while allMatched == 0
     end
 end %while allMatched == 0
 
-responseMatrix
+responseMatrix;
 
 fullIndices = find(instFree == 0);
 quotaArrayLengths(fullIndices) = 0;
@@ -125,8 +125,8 @@ if sum(applFree) > 0
     leftoverAppl = find(applFree == 1);
 end
 
-leftoverInst
-leftoverQuota
-leftoverAppl
+leftoverInst;
+leftoverQuota;
+leftoverAppl;
 
 end %end of the function

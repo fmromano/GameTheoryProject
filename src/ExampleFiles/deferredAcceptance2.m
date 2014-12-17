@@ -1,7 +1,8 @@
-function [resultMatrix] = proposedAlgorithm(coreAvailabilityMatrix,...
+function [resultMatrix] = deferredAcceptance2(coreAvailabilityMatrix,...
     speedMatrix, maxNumCoresMatrix)
 
-%Proposed Algorithm
+
+
 
 if nargin == 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,7 +41,7 @@ if nargin == 0
 % The nth element is the max number of cores that can be used by job n.
     % The number of columns should be the number of jobs.
 maxNumCoresMatrix = [8,20,10,4,1,3,27,14,50,8,40,13,4,18,30];%,58,32,33,41,14,21]
-elseif nargin<=2 && nargin > 4
+elseif nargin<=1 && nargin > 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
 end %if nargin == 0 or ~= 3
 
@@ -74,6 +75,7 @@ end %if nargin == 0 or ~= 3
     % Common variables
     numComps = size(coreAvailabilityMatrix,1);
     numJobs = size(maxNumCoresMatrix,2);
+    tempMatchingMatrix = zeros(numComps,numJobs);
 
     % Matrix to store final matchings
     finalMatchingMatrix = zeros(numComps,numJobs);
@@ -95,29 +97,45 @@ while sum(sum(coreAvailabilityMatrix))>0 && sum(maxNumCoresMatrix)>0
     [matchingMatrix, leftoverJobs, leftoverComps, leftoverQuota] = ...
         collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
     
-%     if numJobs == nnz(matchingMatrix)
-%         finalMatchingMatrix = matchingMatrix;
-%         break %done
-%     end
+    if numJobs == nnz(matchingMatrix)
+        tempMatchingMatrix = tempMatchingMatrix + matchingMatrix;
+        resultMatrix = matchingMatrix;
+        break %done
+    end
 
-    % Find the most significant matching (the one with the job with most cores)
-    % and update the coreAvailabilityMatrix
-    [coreAvailabilityMatrix,matchedJob,matchedComp] = ...
-        updateCoreAvailabilityMatrix(coreAvailabilityMatrix,speedMatrix,...
-                                     maxNumCoresMatrix,matchingMatrix);
-
-    % When a job has been assigned to a computer, set its maxNumCores to zero to signify this
-    % This way, when doing the matching, it will be preferred the least compared with all other jobs
-    maxNumCoresMatrix(matchedJob) = 0;
-
-    % TODO: Record Final matchings
-    finalMatchingMatrix(matchedComp,matchedJob) = matchedJob;
-
+%     % Find the most significant matching (the one with the job with most cores)
+%     % and update the coreAvailabilityMatrix
+%     [coreAvailabilityMatrix,matchedJob,matchedComp] = ...
+%         updateCoreAvailabilityMatrix(coreAvailabilityMatrix,speedMatrix,...
+%                                      maxNumCoresMatrix,matchingMatrix);
+% 
+%     % When a job has been assigned to a computer, set its maxNumCores to zero to signify this
+%     % This way, when doing the matching, it will be preferred the least compared with all other jobs
+%     maxNumCoresMatrix(matchedJob) = 0;
+% 
+%     % TODO: Record Final matchings
+%     finalMatchingMatrix(matchedComp,matchedJob) = matchedJob;
+    
+    for iLoop = 1:numComps
+        currentMatch = nonzeros(matchingMatrix(iLoop,:));
+        
+        if currentMatch ~= 0
+            coreAvailabilityMatrix = ...
+                updateCoreAvailabilityMatrixAlt(coreAvailabilityMatrix, ...
+                speedMatrix, maxNumCoresMatrix, matchingMatrix(iLoop,:), iLoop);
+        end
+        
+    end
+    
+    %Update results matrix and delete jobs that have been taken
+    listOfJobs = nonzeros(matchingMatrix);
+    for jLoop = 1:nnz(matchingMatrix)
+        maxNumCoresMatrix(listOfJobs(jLoop)) = 0;
+    end
+    numJobs = numJobs - nnz(listOfJobs);
+    
+    tempMatchingMatrix = tempMatchingMatrix + matchingMatrix;
     
 end
 
-<<<<<<< HEAD
-resultMatrix = finalMatchingMatrix;
-=======
-finalMatchingMatrix
->>>>>>> origin/master
+resultMatrix = tempMatchingMatrix;

@@ -1,7 +1,7 @@
 function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 
     jobPrefMatrix = [];
-    if nargin>=1 & nargin < 3
+    if nargin>=1 && nargin < 3
         error('Need exactly 3 arguments (Or no arguments for default values)')
     end
     if nargin == 0
@@ -14,7 +14,7 @@ function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, max
                         14,  8, 2; ...
                         23, 12, 18,; ...
                         5, 25,  13,; ...
-                      ]
+                      ];
 
         % The nth row is the nth job's list of speed ratios for the each core type.
         % The number of rows should be the number of jobs.
@@ -25,18 +25,18 @@ function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, max
                         1,  28, 42; ...
                         20, 22, 1,; ...
                         25, 2,  16,; ...
-                      ]
+                      ];
 
         % The nth element is the max number of cores that can be used by job n.
         % The number of columns should be the number of jobs.
-        maxNumCoresMatrix = [8,20,10,1,50]
+        maxNumCoresMatrix = [8,20,10,1,50];
     end
 
     %TODO: Check validity of array dimensions
 
-    totalNumComps = size(coreAvailabilityMatrix,1)
-    totalNumJobs = size(speedMatrix,1)
-    totalNumCoreTypes = size(speedMatrix,2)
+    totalNumComps = size(coreAvailabilityMatrix,1);
+    totalNumJobs = size(speedMatrix,1);
+    totalNumCoreTypes = size(speedMatrix,2);
 
     % Initialize Returned Preference Matrix
     % Each row is a job's ranking of the computers by preference.
