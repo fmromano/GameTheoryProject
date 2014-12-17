@@ -1,6 +1,5 @@
 function [rawTimeScores,percentThreadsUsed,adjustedTimeScores] = ...
-    speedCalc(resultMatrix, ...
-    coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
+    speedCalc(resultMatrix, coreAvailabilityMatrix, speedMatrix, maxNumCoresMatrix)
 %For a given setup, calculate how fast it will take to complete this set of
 %jobs.  Useful if compared to multiple test cases.  Besides that, this
 %number may seem like gibberish.  The scores are derived the same way job
@@ -19,7 +18,7 @@ function [rawTimeScores,percentThreadsUsed,adjustedTimeScores] = ...
 %the time score for that job is reduced to 50% of what it could be.
 
 %To do:  1.  Test this between different schemes.
-if nargin>=1 && nargin < 4
+if nargin<=2 || nargin > 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
 end
 
