@@ -6,13 +6,26 @@ function [rawTimeScores,percentThreadsUsed,adjustedTimeScores] = ...
 %number may seem like gibberish.  The scores are derived the same way job
 %preferences were created.
 
-%To do:  1.  Create a cores used by job X matrix. This setup is currently 
-%computed based on the original number of cores.
+%rawTimeScores:  unadjusted scores of how fast a job can be run.  Cannot
+%be compared betwen jobs unless each job is turned into something
+%equivalent (such speed ratio per thread)
+
+%percentThreadsUsed:  percent of threads used.  A job may be able to be
+%split into X number of threads, but that doesn't mean all of them will be
+%used.
+
+%adjustedTimeScores:  the time scores are adjusted based on how many
+%threads were not used.  For example, if only half of the threads are used,
+%the time score for that job is reduced to 50% of what it could be.
+
+%To do:  1.  Test this between different schemes.
 if nargin>=1 && nargin < 4
     error('Need exactly 3 arguments (Or no arguments for default values)')
 end
 
 if nargin == 0
+    
+    %This setup is completely arbitrary and may not be stable.
     resultMatrix = [1     0     0     0     0;...
                     0     0     3     4     0;...
                     0     0     0     0     0;...
@@ -130,7 +143,7 @@ for mLoop = 1:length(maxNumCoresMatrix)
     end
 end
 
-percentThreadsUsed = percentThreadsUsed./100
+percentThreadsUsed = percentThreadsUsed./100;
 
 adjustedTimeScores = zeros(size(percentThreadsUsed));
 for nLoop = 1:length(maxNumCoresMatrix)
