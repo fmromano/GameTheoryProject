@@ -525,6 +525,58 @@ indifference, and no externalities.
 Things to do:  Write the math and assumptions, state why
 we are doing this, and show that this will be stable as well.
 
+The proposed algorithm is based on a deferred acceptance
+college admissions algorithm with special modifications to optimize it for 
+the situation where the institutions have multiple quotas of different
+types and the applicants can fill multiple slots.
+
+\subsubsection{Algorithm}
+\underline{Step 1}: Calculate the preferences of the jobs (applicants) and the computers
+(institutions).
+A job's preference for a particular computer is determined simply:
+given the processors available on each computer, if a job would peform 
+faster on one computer than another, then the first computer is preferred over the second. 
+Given the relative speeds of each processor at performing a particular job,
+the speed of that job on a particular computer is calculated by first choosing the fastest
+available processors until the job's processor limit is reached or there are no more
+processors available on the computer.
+Then, the speeds of the chosen processors are summed together to give 
+the computer's total speed at the job.
+A job prefers one computer over another if its total speed
+is higher than the other's. 
+
+A computer's preference for a particular job is based on the assumption
+that a computer wants to maximize utilization of its resources. 
+In this case, a job that can utilize more processors than another
+is preferrable. It is assumed that the number of processors that a job can use 
+does not depend on the computer or the processor types and so each computer
+has the same preference ranking of jobs.
+
+
+\underline{Step 2}: Perform a 1-1 Matching.
+The jobs are matched to the computers according the calculated preferences
+using a college admissions algorithm where the quota of a computer is 
+set to 1 if it has at least 1 processor still available. 
+Otherwise, its quota is set to 0.
+
+\underline{Step 3}: Determine the most important matching.
+A job that can use the greatest number of processors is the
+most highly preferred and so it is matched to its first choice
+of computer. Thus this pair is stable and can be assigned to 
+the finalized matching of the algorithm. 
+This job and the processors it uses are no longer available
+so they are removed from future iterations of the algorithm.
+
+\underline{Step 4}: Return to Step 1.
+The algorithm is repeated either until all processors are 
+assigned a job or until all jobs are matched 
+to a computer.
+
+\subsubsection{Guaranteed of Termination}
+The algorithm is guaranteed to terminate because there is a 
+finite number of jobs and each iteration of the algorithm
+matches one job to a computer.
+
 \subsubsection{Stability of Algorithm}
 The proposed algorithm produces a stable matching because in
 each iteration, the college admissions game is used to find
