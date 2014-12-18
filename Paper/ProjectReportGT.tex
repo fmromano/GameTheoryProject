@@ -486,7 +486,7 @@ An algorithm based on multiple iterations of the
 colleged admissions deferred acceptance algorithm is 
 proposed.
 The algorithm is shown to terminate, result in 
-a stable mathcing, and, under certain common conditions,
+a stable matching, and, under certain common conditions,
 approximate an optimal solution.
 The proposed algorithm is simulated 
 and shown to result in either significant improvement 
@@ -498,12 +498,12 @@ or only minor regression compared to other approaches.
 \label{sec:intro}
 Because cloud computing is a cost-effective
 and flexible system for handling data and programs,
-it allows ubiquitous IT services,
+it facilitates ubiquitous IT services,
 ranging from online social networking services to infrastructure
-outsources.  
+outsources, to be available to a wide variety of people.  
 These cloud computing services are packaged in the form of
-virtual machines (VMs) through virtualization technology,
-which allows for computing technologies
+virtual machines (VMs) through virtualization technology.
+This ability enables computing technologies
 to be virtualized by emulating processors, main memory, storage,
 and networking devices [resource needed].  
 %The final product after this virtualization is the virtual machine.
@@ -514,10 +514,10 @@ needs, such as application isolation, security requirements,
 service level-agreements, and computational performance.  [resource needed]
 These VMs and cloud computing servers
 are still housed on powerful physical machines at this point.
-When, due to timing constraints or other restrictions,  each VMs resources are static, 
+When each VM's resources are static, 
 sourcing jobs to individual VMs involves optimizing
 job-VM matchings to maximize resource utilization and
-speed of job completion.
+speed of job completion.  This can happen due to time constraints or other restrictions to the VM
 The problem is similar to the assignment of jobs to 
 distinct compute clusters present on a campus network
 where the clusters cannot exchange resources.
@@ -533,7 +533,7 @@ involved process such that a user would
 wait for an existing VM to become available
 rather than instantiate a new one.
 In this paper,
-a computer-optimal algorithm will be proposed to provide a solution
+a VM-optimal algorithm will be proposed to provide a solution
 that is better for both the virtual machines and the jobs.  
 %More will be stated in section three, Method Description.
 
@@ -595,7 +595,7 @@ prefer each other to the partner they receive at u.  That is, \emph{w} \(\succ_m
 and \emph{m} \(\succ_w \) \( \mu (w) \).  Such a pair is called a blocking set,
 where \(\succ \) represents an agent's preference of one individual over another.
 
-This means that as long as a matching is not blocked and a matching set is individually
+This means that as long as a matching is not blocked and a matching set is individual
 rational, a matched set will be stable.  Therefore:
 
 \emph{Theorem 1}:  A stable matching pair exists for every marriage market.
@@ -622,23 +622,25 @@ There may exist another stable matching where at least one woman
 receives a more preferred matching and no women receive a less preferred matching.
 If the men and women switched, and the
 women were the ones proposing to the men, then it would be the men who are 
-not guaranteed their optimal choices.
+not guaranteed their optimal choices. A better solution
+would be one where the results between the applicants
+and the institutions were equally optimal.
 
 \section{Method Description}
 \label{sec:method}
-The problem formulation and proposed algorithm 
-are described.
+The problem formulation and proposed algorithm
+are described in the following subsections.
 
 \subsection{Problem Formulation}
 This paper explores the problem of optimal assignement
-of jobs to separate computer clusters.  Each of these
+of jobs to separate VMs.  Each of these
 jobs perform differently on different cores types where these
 core types can be graphical processors, computational
-processors, or something else.  
-Each of these clusters
+processors, or something specifically for a certain program.  
+Each of these VMs
 have different core types, each job can only be divided into
 a finite number of threads, and each job is assigned to 
-one computer at a time.
+one VM at a time.
 
 The problem can be modeled as a college admissions
 game with a few key differences:
@@ -649,8 +651,8 @@ slot types over others.
 As before, an applicant cannot be
 divided among multiple institutions.
 
-Key assumptions for this problem are:  the virtual machines
-are like flexible computers, jobs are submitted at
+Key assumptions for this problem are:  the VMs
+are viewed as flexible computers, jobs are submitted at
 the same time, chosen jobs are completed simulatenously,
 unchosen jobs are submitted with the next round, no
 indifference, and no externalities.
@@ -670,47 +672,46 @@ types and the applicants can fill multiple slots.
 Initialize preference matrices and quotas\;
 
 \While{Either jobs or VMs are left}{
-	1. Set quota to 1 for each non-full VM\;
-	2. Run Deferred Acceptance Algorithm\;
-	3. Choose job who used the most of the computer resources and keep it\;
-	4. Save this job to the results matrix\;
-	5. Update preference matrices and core availability matrix\;
+	1. Perform a one-to-one matching using the Deferred Acceptance Algorithm\;
+	2. Determine most important matching\;
+	3. Save this match to the results matrix\;
+	4. Update preference matrices and core availability matrix\;
 }
 
 Compile results and send to user\
 \end{algorithm}
-\underline{Step 1}: Calculate the preferences of the jobs (applicants) and the computers
+\underline{Step 1}: Calculate the preferences of the jobs (applicants) and the VMs
 (institutions).
 A job's preference for a particular computer is determined simply:
-given the processors available on each computer, if a job would peform 
-faster on one computer than another, then the first computer is preferred over the second. 
+given the processors available on each VM, if a job would peform 
+faster on one VM than another, then the first VM is preferred over the second. 
 Given the relative speeds of each processor at performing a particular job,
-the speed of that job on a particular computer is calculated by first choosing the fastest
+the speed of that job on a particular VM is calculated by first choosing the fastest
 available processors until the job's processor limit is reached or there are no more
-processors available on the computer.
+processors available on the VM.
 Then, the speeds of the chosen processors are summed together to give 
-the computer's total speed at the job.
-A job prefers one computer over another if its total speed
+the VM's total speed at the job.
+A job prefers one VM over another if its total speed
 is higher than the other's. 
 
-A computer's preference for a particular job is based on the assumption
-that a computer wants to maximize utilization of its resources. 
+A VM's preference for a particular job is based on the assumption
+that a VM wants to maximize utilization of its resources. 
 In this case, a job that can utilize more processors than another
 is preferrable. It is assumed that the number of processors that a job can use 
-does not depend on the computer or the processor types and so each computer
+does not depend on the VM or the processor types and so each VM
 has the same preference ranking of jobs.
 
 
-\underline{Step 2}: Perform a 1-1 Matching.
-The jobs are matched to the computers according the calculated preferences
-using a college admissions algorithm where the quota of a computer is 
+\underline{Step 2}: Perform a one-to-one matching.
+The jobs are matched to the VMs according the calculated preferences
+using a college admissions algorithm where the quota of a VM is 
 set to 1 if it has at least 1 processor still available. 
 Otherwise, its quota is set to 0.
 
 \underline{Step 3}: Determine the most important matching.
 A job that can use the greatest number of processors is the
 most highly preferred and so it is matched to its first choice
-of computer. Thus this pair is stable and can be assigned to 
+of VM. Thus this pair is stable and can be assigned to 
 the finalized matching of the algorithm. 
 This job and the processors it uses are no longer available
 so they are removed from future iterations of the algorithm.
@@ -718,12 +719,12 @@ so they are removed from future iterations of the algorithm.
 \underline{Step 4}: Return to Step 1.
 The algorithm is repeated either until all processors are 
 assigned a job or until all jobs are matched 
-to a computer.
+to a VM.
 
 \subsubsection{Guaranteed of Termination}
 The algorithm is guaranteed to terminate because there is a 
 finite number of jobs and each iteration of the algorithm
-matches one job to a computer.
+matches one job to a VM.
 
 \subsubsection{Stability of Algorithm}
 The proposed algorithm produces a stable matching because in
@@ -731,10 +732,10 @@ each iteration, the college admissions game is used to find
 a set of stable matchings.
 Out of the jobs listed in the resultant set of stable matchings,
 the job that can use the most processors is preferred most
-by every computer. Thus, that job will be matched with its first 
-choice and its matching to a computer is a stable matching.
+by every VM. Thus, that job will be matched with its first 
+choice and its matching to a VM is a stable matching.
 Thus, each pair produced by an iteration of the proposed
-algorithm is stable and therefore the final matching is stable.
+algorithm is stable, and therefore the final matching is stable.
 
 \subsubsection{Optimality of Algorithm}
 Whether the matching is optimal can be understood in multiple senses.
@@ -746,20 +747,21 @@ A simple goal of the proposed algorithm would be to
 maximize processor utiliztion so that no computing 
 resources go unused/wasted.
 
-The proposed algorithm does not alway maximize processor 
+The proposed algorithm does not always maximize processor 
 utilization. However, it does in every iteration 
-where the preferred computer of the job with
+where the preferred VM of the job with
 the greatest possible processor utilization
 has at least as many processors 
 available as either
     i) that job can use or
-    ii) any other computer has.
-This situation is common because, often, a computer with more 
-available processors will outperform
+    ii) any other VM has.
+This situation is common because, often, a //vm with more 
+available processor resources will outperform
 one with fewer. The exceptions occurs where there is 
-a computer that has special purpose procesors
-that significantly outperform those available at other 
-computers and this computer does not meet either 
+a VM that has special purpose processors, such as ones
+that are developed for specific tasks.  Those exceptions
+will significantly outperform those available at other 
+VMs.  This VM does not meet either 
 of conditions i) or ii) listed above.
 
 \underline{Total Job Completion Time}:
@@ -857,7 +859,8 @@ the average number of cores used per VM, and a resource score that represents ho
 The average speed score is based on the speed ratios for each job depending on the core type.  
 For this number, higher scores are better, but they can only be compared within a single simulation.  
 To enable comparisons across the different simulations, these values were converted to percent changes.  
-The simple matching scheme was set as the baseline.  
+The simple matching scheme was set as the baseline, which is why each of its sections for percent change
+are zero percent.
 
 The next metric, the average percent of jobs assigned to a VM,
 represents the number of jobs successfully assigned to a VM before the available cores were depleted.  
@@ -867,7 +870,7 @@ The average number of cores used per VM represents how effectively the VM resour
 In this work, the VMs prefer to be completely utilized. 
 This score would also reflect whether a VM is matched to any jobs at all.
 Finally, the last score is the resource score, which represents how well the jobs are distributed among the different core types.  
-It reflects how frequently each job is executed the best it could be on a given computer. 
+It reflects how frequently each job is executed the best it could be on a given VM. 
 
 
 
@@ -880,7 +883,7 @@ It reflects how frequently each job is executed the best it could be on a given 
              & \multicolumn{3}{c|}{Comparison} \\ \cline{2-4} 
               & I & II & III \\ \hline
               \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Number of Simulations\end{tabular}} & 500 & 100 & 100 \\ \hline
-              \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Number of Computers\end{tabular}} & {[}1,20{]} & {[}1,50{]} & {[}1,20{]} \\ \hline
+              \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Number of VMs\end{tabular}} & {[}1,20{]} & {[}1,50{]} & {[}1,20{]} \\ \hline
               \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Number of Jobs\end{tabular}} & {[}1,50{]} & {[}1,100{]} & {[}1,100{]} \\ \hline
               \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Number of Core Types\end{tabular}} & {[}1,5{]} & {[}1,10{]} & {[}1,5{]} \\ \hline
               \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Max. Number of Cores per Type\end{tabular}} & {[}1,25{]} & {[}1,50{]} & {[}1,50{]} \\ \hline
@@ -953,6 +956,28 @@ It reflects how frequently each job is executed the best it could be on a given 
      \label{compIII}
 \end{table}
 % End Comparison Table III
+
+These algorithms were compared in three tests.  For each test, 
+a set of randomly defined inputs were entered into each algorithm 
+for each iteration.  During these iterations, the metrics were sampled, 
+averaged, and stored until all of the runs were finished.  All random
+ numbers were generated using the uniform random function in MATLAB.  
+The parameters for the inputs of the comparison function for each 
+iteration can be found in Table I.
+
+The number of simulations represents how many runs the comparison 
+program executed.  The number of VMs parameter decided the minimum 
+and maximum number of VMs, from 1 to a positive integer, during an iteration.  
+The number of jobs parameter decided the maximum and minimum number 
+of jobs during each iteration.  The number of core types parameter decided 
+the minimum and maximum number of different cores types that would be 
+available for the user.  The maximum number of cores per type parameter 
+decided how many of which type of core were available for a job.  
+The maximum number of threads per job parameter decided how big the
+ job could be and how many threads could be matched to available cores.  
+The speed ratios parameter decided how fast each job would be on every core type.
+
+
 
 \section{Related Work}
 \label{sec:related}
@@ -1098,17 +1123,17 @@ and contributed to this written report.
 %\bibitem{ref:Adolphs}
 %``Distributed Selfish Load Balancing with Weights and Speeds"
 
-%[1]Y. Jiang, X. Shen, J. Chen, and R. Tripathi,\mathbf{ }ÄúAnalysis and Approximation of Optimal Co-scheduling on Chip Multiprocessors\mathbf{,}Äù in Proceedings of the 17th International Conference on Parallel Architectures and Compilation Techniques, New York, NY, USA, 2008, pp. 22\mathbf{0}Äì229.
-%[2]D. Gale and L. S. Shapley,\mathbf{ }ÄúCollege Admissions and the Stability of Marriage\mathbf{,}Äù The American Mathematical Monthly, vol. 69, no. 1, p. 9, Jan. 1962.
-%[3\mathbf{]}ÄúCollege Admissions and the Stability of Marriage on JSTOR\mathbf{.}Äù .
-%[4]C. P. J. Adolphs and P. Berenbrink,\mathbf{ }ÄúDistributed Selfish Load Balancing with Weights and Speeds\mathbf{,}Äù in Proceedings of the 2012 ACM Symposium on Principles of Distributed Computing, New York, NY, USA, 2012, pp. 13\mathbf{5}Äì144.
-%[5]H. Xu and B. Li,\mathbf{ }ÄúEgalitarian stable matching for VM migration in cloud computing\mathbf{,}Äù in 2011 IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS), 2011, pp. 63\mathbf{1}Äì636.
-%[6]D. F. Manlove, R. W. Irving, K. Iwama, S. Miyazaki, and Y. Morita,\mathbf{ }ÄúHard variants of stable marriage\mathbf{,}Äù Theoretical Computer Science, vol. 276, no. \mathbf{1}Äì2, pp. 26\mathbf{1}Äì279, Apr. 2002.
-%[7]H. Xu and B. Li,\mathbf{ }ÄúSeen as stable marriages\mathbf{,}Äù in 2011 Proceedings IEEE INFOCOM, 2011, pp. 58\mathbf{6}Äì590.
-%[8]A. E. Roth,\mathbf{ }ÄúStability and Polarization of Interests in Job Matching\mathbf{,}Äù Econometrica, vol. 52, no. 1, p. 47, Jan. 1984.
-%[9\mathbf{]}ÄúStability and Polarization of Interests in Job Matching on JSTOR\mathbf{.}Äù .
-%[10]X. Wen, K. Chen, Y. Chen, Y. Liu, Y. Xia, and C. Hu,\mathbf{ }ÄúVirtualKnotter: Online Virtual Machine Shuffling for Congestion Resolving in Virtualized Datacenter\mathbf{,}Äù in 2012 IEEE 32nd International Conference on Distributed Computing Systems (ICDCS), 2012, pp. 1\mathbf{2}Äì21.
-%[11]J. S. Dhillon, S. Purini, and S. Kashyap,\mathbf{ }ÄúVirtual Machine Coscheduling: A Game Theoretic Approach\mathbf{,}Äù in 2013 IEEE/ACM 6th International Conference on Utility and Cloud Computing (UCC), 2013, pp. 22\mathbf{7}Äì234.
+%[1]Y. Jiang, X. Shen, J. Chen, and R. Tripathi,\mathbf{ }ÔøΩÔøΩAnalysis and Approximation of Optimal Co-scheduling on Chip Multiprocessors\mathbf{,}ÔøΩÔøΩ in Proceedings of the 17th International Conference on Parallel Architectures and Compilation Techniques, New York, NY, USA, 2008, pp. 22\mathbf{0}ÔøΩÔøΩ229.
+%[2]D. Gale and L. S. Shapley,\mathbf{ }ÔøΩÔøΩCollege Admissions and the Stability of Marriage\mathbf{,}ÔøΩÔøΩ The American Mathematical Monthly, vol. 69, no. 1, p. 9, Jan. 1962.
+%[3\mathbf{]}ÔøΩÔøΩCollege Admissions and the Stability of Marriage on JSTOR\mathbf{.}ÔøΩÔøΩ .
+%[4]C. P. J. Adolphs and P. Berenbrink,\mathbf{ }ÔøΩÔøΩDistributed Selfish Load Balancing with Weights and Speeds\mathbf{,}ÔøΩÔøΩ in Proceedings of the 2012 ACM Symposium on Principles of Distributed Computing, New York, NY, USA, 2012, pp. 13\mathbf{5}ÔøΩÔøΩ144.
+%[5]H. Xu and B. Li,\mathbf{ }ÔøΩÔøΩEgalitarian stable matching for VM migration in cloud computing\mathbf{,}ÔøΩÔøΩ in 2011 IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS), 2011, pp. 63\mathbf{1}ÔøΩÔøΩ636.
+%[6]D. F. Manlove, R. W. Irving, K. Iwama, S. Miyazaki, and Y. Morita,\mathbf{ }ÔøΩÔøΩHard variants of stable marriage\mathbf{,}ÔøΩÔøΩ Theoretical Computer Science, vol. 276, no. \mathbf{1}ÔøΩÔøΩ2, pp. 26\mathbf{1}ÔøΩÔøΩ279, Apr. 2002.
+%[7]H. Xu and B. Li,\mathbf{ }ÔøΩÔøΩSeen as stable marriages\mathbf{,}ÔøΩÔøΩ in 2011 Proceedings IEEE INFOCOM, 2011, pp. 58\mathbf{6}ÔøΩÔøΩ590.
+%[8]A. E. Roth,\mathbf{ }ÔøΩÔøΩStability and Polarization of Interests in Job Matching\mathbf{,}ÔøΩÔøΩ Econometrica, vol. 52, no. 1, p. 47, Jan. 1984.
+%[9\mathbf{]}ÔøΩÔøΩStability and Polarization of Interests in Job Matching on JSTOR\mathbf{.}ÔøΩÔøΩ .
+%[10]X. Wen, K. Chen, Y. Chen, Y. Liu, Y. Xia, and C. Hu,\mathbf{ }ÔøΩÔøΩVirtualKnotter: Online Virtual Machine Shuffling for Congestion Resolving in Virtualized Datacenter\mathbf{,}ÔøΩÔøΩ in 2012 IEEE 32nd International Conference on Distributed Computing Systems (ICDCS), 2012, pp. 1\mathbf{2}ÔøΩÔøΩ21.
+%[11]J. S. Dhillon, S. Purini, and S. Kashyap,\mathbf{ }ÔøΩÔøΩVirtual Machine Coscheduling: A Game Theoretic Approach\mathbf{,}ÔøΩÔøΩ in 2013 IEEE/ACM 6th International Conference on Utility and Cloud Computing (UCC), 2013, pp. 22\mathbf{7}ÔøΩÔøΩ234.
 
 
 
