@@ -980,7 +980,39 @@ The maximum number of threads per job parameter decided how big the
  job could be and how many threads could be matched to available cores.  
 The speed ratios parameter decided how fast each job would be on each core type.
 
+Each of the algorithms are defined as follows:  S.M. stands for simple matching. 
+ D.A.1 stands for deferred acceptance algorithm with evenly distributed quotas. 
+ D.A. 2 stands for the deferred acceptance algorithm who performs a one-to-one 
+matching each iteration.  This is the algorithm whose preference matrices change
+ each iteration due to jobs being matched and cores being used.  Prop. Alg. stands 
+for the proposed algorithm introduced in this paper.
 
+The test cases represent three possible scenarios:  one where the VMs and 
+jobs are evenly matched, one where there are many available VM resources, 
+and one where the number of jobs typically outnumbers the number of 
+available VMs.  For these cases, the job performance is measured by the percent jobs 
+assigned, average available threads used, average resource score, and average 
+percent change in the speed score compared to the simple matching scheme.  The 
+VM performance is based on the average percent of cores used because its main 
+requirement was to have all of the resources among all of the VMs used.  All values 
+used for comparisons are defined as percentages.
+
+\subsection{Comparison I:  Normal amount of VMs to jobs}
+
+In this case, simple matching performs worse compared to everyone else based 
+on average available threads used, average cores used, and average resource
+ score.  The first deferred acceptance algorithm performed similarly to simple
+ matching.  Both the second deferred acceptance algorithm and our proposed 
+algorithm performed similarly to each other and better on average than the other 
+two for this example.  The first deferred acceptance algorithm performed better 
+in terms of resources used and threads used for this example.  The proposed 
+algorithm performed its jobs the fastest.
+
+\subsection{Comparison II: More VM resources compared to jobs}
+
+\subsection{Comparison III: More jobs than VM resources available}
+
+\subsection{Discussion of Results}
 
 \section{Related Work}
 \label{sec:related}
