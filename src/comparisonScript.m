@@ -5,15 +5,46 @@ clear all
 close all
 format compact
 
-numberOfRuns = 200;
-aveTimeScr = zeros(4,1);
-perJobAsgn = aveTimeScr;
-avePerThdsAsgn = aveTimeScr;
+% %Run 1
+% numberOfRuns = 500;
+% numComp = 20;
+% numJob = 50;
+% numCoreType = 5;
+% maxCoresPerType = 25;
+% maxThreads = 50;
+% speedRatio = 100;
+
+% %Run 2
+% numberOfRuns = 100;
+% numComp = 50;
+% numJob = 100;
+% numCoreType = 10;
+% maxCoresPerType = 50;
+% maxThreads = 200;
+% speedRatio = 200;
+
+% %Run 3
+% numberOfRuns = 100;
+% numComp = 20;
+% numJob = 100;
+% numCoreType = 5;
+% maxCoresPerType = 50;
+% maxThreads = 50;
+% speedRatio = 200;
+
+%Run 4
+numberOfRuns = 500;
+numComp = 10;
+numJob = 50;
+numCoreType = 5;
+maxCoresPerType = 25;
+maxThreads = 50;
+speedRatio = 200;
 
 %Random Runs
-coreAvailabilityMatrix = ceil(25.*rand(ceil(20.*rand(1)),ceil(5.*rand(1))));
-speedMatrix = ceil(100.*rand(ceil(50.*rand(1)),length(coreAvailabilityMatrix(1,:))));
-maxNumCoresMatrix = ceil(50.*rand(1,length(speedMatrix(:,1))));
+coreAvailabilityMatrix = ceil(maxCoresPerType*rand(ceil(numComp.*rand(1)),ceil(numCoreType.*rand(1))));
+speedMatrix = ceil(speedRatio.*rand(ceil(numJob.*rand(1)),length(coreAvailabilityMatrix(1,:))));
+maxNumCoresMatrix = ceil(maxThreads.*rand(1,length(speedMatrix(:,1))));
     
     [aveTimeScr,perJobAsgn,avePerThdsAsgn,aveCorePer,aveResScr] = ...
     comparisonFunction(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
@@ -21,10 +52,9 @@ maxNumCoresMatrix = ceil(50.*rand(1,length(speedMatrix(:,1))));
 
 for runLoop = 2:numberOfRuns
     %Random Runs
-coreAvailabilityMatrix = ceil(25.*rand(ceil(20.*rand(1)),ceil(5.*rand(1))));
-speedMatrix = ceil(100.*rand(ceil(50.*rand(1)),length(coreAvailabilityMatrix(1,:))));
-maxNumCoresMatrix = ceil(50.*rand(1,length(speedMatrix(:,1))));
-
+    coreAvailabilityMatrix = ceil(maxCoresPerType*rand(ceil(numComp.*rand(1)),ceil(numCoreType.*rand(1))));
+    speedMatrix = ceil(speedRatio.*rand(ceil(numJob.*rand(1)),length(coreAvailabilityMatrix(1,:))));
+    maxNumCoresMatrix = ceil(maxThreads.*rand(1,length(speedMatrix(:,1))));
 
     [aveTimeScrTmp,perJobAsgnTmp,avePerThdsAsgnTmp,aveCorePerTmp,aveResScrTmp] = ...
     comparisonFunction(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
