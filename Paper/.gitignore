@@ -5,3 +5,4 @@
 # Ignore temporary latex files
 *.aux
 *.log
+*.synctex.gz
