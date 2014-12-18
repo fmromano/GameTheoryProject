@@ -54,14 +54,14 @@ end %if nargin == 0
 %Matchings jobs and computers based on job preference only.  This is a
 %waiting list setup.  Matched based on first preferences.
 jobPrefs = jobPreferences(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
-
+jobList = 1:length(jobPrefs(:,1));
 [preferredComputer,jobNumber] = sort(jobPrefs(:,1));
 [chosenComputers,numJobs] = count_unique(preferredComputer);
 
 resultMatrix = zeros(size(jobPrefs))';
 for iLoop = 1:length(chosenComputers)
     for jLoop = 1:numJobs(iLoop)
-        resultMatrix(chosenComputers(iLoop),jLoop) = jobNumber(jLoop);
+        resultMatrix(chosenComputers(iLoop),jobNumber(jLoop)) = jobNumber(jLoop);
     end
     
     jobNumber = jobNumber((numJobs(iLoop)+1):end);

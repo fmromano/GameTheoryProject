@@ -95,10 +95,10 @@ while sum(sum(coreAvailabilityMatrix))>0 && sum(maxNumCoresMatrix)>0
     [matchingMatrix, leftoverJobs, leftoverComps, leftoverQuota] = ...
         collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
     
-%     if numJobs == nnz(matchingMatrix)
-%         finalMatchingMatrix = matchingMatrix;
-%         break %done
-%     end
+     if numJobs == nnz(matchingMatrix)
+         finalMatchingMatrix = matchingMatrix;
+         break %done
+     end
 
     % Find the most significant matching (the one with the job with most cores)
     % and update the coreAvailabilityMatrix

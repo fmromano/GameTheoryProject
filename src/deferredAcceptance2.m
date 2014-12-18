@@ -75,6 +75,7 @@ end %if nargin == 0 or ~= 3
     % Common variables
     numComps = size(coreAvailabilityMatrix,1);
     numJobs = size(maxNumCoresMatrix,2);
+    totalNumJobs = numJobs;
     tempMatchingMatrix = zeros(numComps,numJobs);
 
     % Matrix to store final matchings
@@ -97,24 +98,19 @@ while sum(sum(coreAvailabilityMatrix))>0 && sum(maxNumCoresMatrix)>0
     [matchingMatrix, leftoverJobs, leftoverComps, leftoverQuota] = ...
         collegeAdmissionsGame(jobPrefs,compPrefs,quotaArray);
     
+    %get rid of duplicates
+    for rLoop = 1:totalNumJobs
+        if nonzeros(matchingMatrix(:,rLoop)) == nonzeros(tempMatchingMatrix(:,rLoop))
+            matchingMatrix(:,rLoop) = 0;
+        end
+        
+    end
+    
     if numJobs == nnz(matchingMatrix)
         tempMatchingMatrix = tempMatchingMatrix + matchingMatrix;
-        resultMatrix = matchingMatrix;
+        resultMatrix = tempMatchingMatrix;
         break %done
     end
-
-%     % Find the most significant matching (the one with the job with most cores)
-%     % and update the coreAvailabilityMatrix
-%     [coreAvailabilityMatrix,matchedJob,matchedComp] = ...
-%         updateCoreAvailabilityMatrix(coreAvailabilityMatrix,speedMatrix,...
-%                                      maxNumCoresMatrix,matchingMatrix);
-% 
-%     % When a job has been assigned to a computer, set its maxNumCores to zero to signify this
-%     % This way, when doing the matching, it will be preferred the least compared with all other jobs
-%     maxNumCoresMatrix(matchedJob) = 0;
-% 
-%     % TODO: Record Final matchings
-%     finalMatchingMatrix(matchedComp,matchedJob) = matchedJob;
     
     for iLoop = 1:numComps
         currentMatch = nonzeros(matchingMatrix(iLoop,:));
@@ -132,6 +128,7 @@ while sum(sum(coreAvailabilityMatrix))>0 && sum(maxNumCoresMatrix)>0
     for jLoop = 1:nnz(matchingMatrix)
         maxNumCoresMatrix(listOfJobs(jLoop)) = 0;
     end
+    
     numJobs = numJobs - nnz(listOfJobs);
     
     tempMatchingMatrix = tempMatchingMatrix + matchingMatrix;

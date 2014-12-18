@@ -5,40 +5,47 @@ clear all
 close all
 format compact
 
-numberOfRuns = 50;
-averageTimeScores = zeros(4,1);
-percentJobsAssigned = averageTimeScores;
-averagePercentThreadsAssigned = averageTimeScores;
+numberOfRuns = 200;
+aveTimeScr = zeros(4,1);
+perJobAsgn = aveTimeScr;
+avePerThdsAsgn = aveTimeScr;
 
 %Random Runs
-    coreAvailabilityMatrix = ceil(25.*rand(14,3));
-    speedMatrix = ceil(100.*rand(14,3));
-    maxNumCoresMatrix = ceil(50.*rand(1,14));
+coreAvailabilityMatrix = ceil(25.*rand(ceil(20.*rand(1)),ceil(5.*rand(1))));
+speedMatrix = ceil(100.*rand(ceil(50.*rand(1)),length(coreAvailabilityMatrix(1,:))));
+maxNumCoresMatrix = ceil(50.*rand(1,length(speedMatrix(:,1))));
     
-    [averageTimeScores,percentJobsAssigned, averagePercentThreadsAssigned] = ...
+    [aveTimeScr,perJobAsgn,avePerThdsAsgn,aveCorePer,aveResScr] = ...
     comparisonFunction(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 
 
 for runLoop = 2:numberOfRuns
     %Random Runs
-    coreAvailabilityMatrix = ceil(25.*rand(14,3));
-    speedMatrix = ceil(100.*rand(14,3));
-    maxNumCoresMatrix = ceil(20.*rand(1,14));
+coreAvailabilityMatrix = ceil(25.*rand(ceil(20.*rand(1)),ceil(5.*rand(1))));
+speedMatrix = ceil(100.*rand(ceil(50.*rand(1)),length(coreAvailabilityMatrix(1,:))));
+maxNumCoresMatrix = ceil(50.*rand(1,length(speedMatrix(:,1))));
 
-    [averageTimeScoresTemp,percentJobsAssignedTemp,averagePercentThreadsAssignedTemp] = ...
+
+    [aveTimeScrTmp,perJobAsgnTmp,avePerThdsAsgnTmp,aveCorePerTmp,aveResScrTmp] = ...
     comparisonFunction(coreAvailabilityMatrix,speedMatrix,maxNumCoresMatrix);
 
-    for iLoop = 1:length(averageTimeScores)
-        averageTimeScores(iLoop) = mean([averageTimeScores(iLoop) averageTimeScoresTemp(iLoop)]);
-        percentJobsAssigned(iLoop) = mean([percentJobsAssigned(iLoop) ...
-            percentJobsAssignedTemp(iLoop)]); 
-        averagePercentThreadsAssigned(iLoop) = mean([averagePercentThreadsAssigned(iLoop)...
-            averagePercentThreadsAssignedTemp(iLoop)]);
+    for iLoop = 1:length(aveTimeScr)
+        aveTimeScr(iLoop) = mean([aveTimeScr(iLoop) aveTimeScrTmp(iLoop)]);
+        perJobAsgn(iLoop) = mean([perJobAsgn(iLoop) ...
+            perJobAsgnTmp(iLoop)]); 
+        avePerThdsAsgn(iLoop) = mean([avePerThdsAsgn(iLoop)...
+            avePerThdsAsgnTmp(iLoop)]);
+        aveCorePer(iLoop) = mean([aveCorePer(iLoop)...
+            aveCorePerTmp(iLoop)]);
+        aveResScr(iLoop) = mean([aveResScr(iLoop)...
+            aveResScrTmp(iLoop)]);
     end
     
     disp(runLoop)
 end
 
-averageTimeScores
-percentJobsAssigned
-averagePercentThreadsAssigned
+aveTimeScr
+perJobAsgn
+avePerThdsAsgn
+aveCorePer
+aveResScr

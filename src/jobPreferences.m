@@ -47,26 +47,33 @@ function jobPrefMatrix = jobPreferences(coreAvailabilityMatrix, speedMatrix, max
     for jobNum = 1:totalNumJobs
         tmpCoreAvailabilityMatrix = coreAvailabilityMatrix;
         processingPower = zeros(1,totalNumComps);
+        
         % For each computer
         for compNum = 1:totalNumComps
             coresAddedSoFar = 0;
+            
             % Calculate relative speed at completing job
             [sortedCoreSpeeds,coreTypeRanking] = sort(speedMatrix(jobNum,:),'descend') ;
+            
             for coreNum = 1:totalNumCoreTypes
                 % Find the best core for this job
                 nextBestCoreType = coreTypeRanking(coreNum);
+                
                 % Use all the cores of this type that the computer has available.
                 while tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)>0
-                    % For each core used, add its processing power to the total
-                    processingPower(compNum) = processingPower(compNum) + speedMatrix(jobNum,nextBestCoreType);
-                    coresAddedSoFar = coresAddedSoFar + 1;
-                    % The core is no longer available so mark it as such.
-                    tmpCoreAvailabilityMatrix(compNum,nextBestCoreType) = tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)-1;
                     % Stop if job has reached max number of cores
                     if coresAddedSoFar == maxNumCoresMatrix(jobNum)
                         break
                     end
+                    
+                    % For each core used, add its processing power to the total
+                    processingPower(compNum) = processingPower(compNum) + speedMatrix(jobNum,nextBestCoreType);
+                    coresAddedSoFar = coresAddedSoFar + 1;
+                    
+                    % The core is no longer available so mark it as such.
+                    tmpCoreAvailabilityMatrix(compNum,nextBestCoreType) = tmpCoreAvailabilityMatrix(compNum,nextBestCoreType)-1;
                 end
+                
                 % Stop if job has reached max number of cores
                 if coresAddedSoFar == maxNumCoresMatrix(jobNum)
                     break

@@ -3,8 +3,9 @@ function [resourceScores,percentCoresUsed] = ...
 %The purpose of this function is to see how efficiently the resources are
 %distributed.
 
-%resourceScores:  scores based on the optimality of the cores chosen
-%(optimality is based on speedMatrix)
+%resourceScores:  This is based on the speed matrix and the core types
+%used.  If a job is able to use the best cores, it will run the most
+%efficiently.
 
 %percentCoresUsed:  see how many cores are used (one thread per core)
 
@@ -46,10 +47,10 @@ end
 
 %% Find the Percent of Cores Used First (1 == 100% <= all used)
 updatedCoreAvailabilityMatrix = coreAvailabilityMatrix;
-for iLoop = 1:5
+for iLoop = 1:length(coreAvailabilityMatrix(:,1))
         currentMatch = nonzeros(resultMatrix(iLoop,:));
         
-        if currentMatch ~= 0
+        if ~isempty(currentMatch)
             updatedCoreAvailabilityMatrix = ...
                 updateCoreAvailabilityMatrixAlt(updatedCoreAvailabilityMatrix, ...
                 speedMatrix, maxNumCoresMatrix, resultMatrix(iLoop,:), iLoop);
@@ -59,19 +60,25 @@ end
 if sum(sum(updatedCoreAvailabilityMatrix)) == 0
     percentCoresUsed = 1;
 else
-    percentCoresPerComp = zeros(1,length(coreAvailabilityMatrix));
-
-    for jLoop = 1:length(percentCoresPerComp)
-        coresUsed = sum(coreAvailabilityMatrix(iLoop,:)) - ...
-                    sum(updatedCoreAvailabilityMatrix(iLoop,:));
-
-        totalCores = sum(coreAvailabilityMatrix(iLoop,:));
-                            
-        percentCoresPerComp(jLoop) = coresUsed./totalCores;
-
-    end
-    
-    percentCoresUsed = mean(percentCoresPerComp);
+%     percentCoresPerComp = zeros(1,length(coreAvailabilityMatrix));
+% 
+%     for jLoop = 1:length(percentCoresPerComp)
+%         coresUsed = sum(coreAvailabilityMatrix(jLoop,:)) - ...
+%                     sum(updatedCoreAvailabilityMatrix(jLoop,:));
+% 
+%         totalCores = sum(coreAvailabilityMatrix(jLoop,:));
+%                             
+%         percentCoresPerComp(jLoop) = coresUsed./totalCores;
+% 
+%     end
+%     
+%     percentCoresUsed = mean(percentCoresPerComp);
+        coresUsed = sum(sum(coreAvailabilityMatrix)) - ...
+            sum(sum(updatedCoreAvailabilityMatrix));
+        
+        totalCores = sum(sum(coreAvailabilityMatrix));
+        
+        percentCoresUsed = coresUsed./totalCores;
 end
 
 %% Find resources used
@@ -93,7 +100,9 @@ coresUsedPerJob = zeros(totalNumCoreTypes+1,totalNumJobs);
 %then calculate their speed ratios similar to how the speeds were used for
 %the job preference matrices.
 tmpCoreAvailabilityMatrix = coreAvailabilityMatrix;
+% For each job, calculate which cores were used
 for compNum = 1:totalNumComps
+
     totalJobsPerComp = nnz(resultMatrix(compNum,:));
     jobList = nonzeros(resultMatrix(compNum,:));
     
@@ -142,12 +151,19 @@ for compNum = 1:totalNumComps
 end  %for compnum
 
 coresUsedPerJob = coresUsedPerJob';
+percentOptimal = zeros(1,totalNumCoreTypes+1);
+resourceScores = zeros(1,totalNumJobs);
+speedMatrix = [speedMatrix'; zeros(1,length(maxNumCoresMatrix))]';
 
 for rLoop = 1:totalNumJobs
-    for sLoop = 1:(totalCores+1)
+    maxSpeed = max(speedMatrix(rLoop,:));
+    percentOptimal = zeros(1,totalNumCoreTypes+1);
+    for sLoop = 1:(totalNumCoreTypes+1)        
+        percentOptimal(sLoop) = (speedMatrix(rLoop,sLoop).*...
+                                 coresUsedPerJob(rLoop,sLoop))./maxSpeed;
         
-
     end
+    resourceScores(rLoop) = sum(percentOptimal)./maxNumCoresMatrix(rLoop);
 end
 
 %Rank the jobs based on the cores... maybe
