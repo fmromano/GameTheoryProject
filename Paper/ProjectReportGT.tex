@@ -626,30 +626,33 @@ not guaranteed their optimal choices.
 
 \section{Method Description}
 \label{sec:method}
-The problem formulation and proposed algorithm will be
-described in this section.
+The problem formulation and proposed algorithm 
+are described.
 
 \subsection{Problem Formulation}
-The problem this paper is exploring is how to optimize job 
-assigment to separate computer clusters.  Each of these
-jobs perform differently on different cores types.  These
+This paper explores the problem of optimal assignement
+of jobs to separate computer clusters.  Each of these
+jobs perform differently on different cores types where these
 core types can be graphical processors, computational
-processors, or something else.  Each of these clusters
-have different core types.  Each job can only be divided into
+processors, or something else.  
+Each of these clusters
+have different core types, each job can only be divided into
 a finite number of threads, and each job is assigned to 
 one computer at a time.
 
-This problem can be formed as a college admissions
-game.  The differences are that the institutions
+The problem can be modeled as a college admissions
+game with a few key differences:
+The institutions
 have multiple quotas, each applicant can fill multiple
-slots of different types, applicants prefer different
-slot types over others, and an applicant cannot be
+slots of different types, and applicants prefer some
+slot types over others.
+As before, an applicant cannot be
 divided among multiple institutions.
 
 Key assumptions for this problem are:  the virtual machines
-will be treated like flexible computers, jobs are submitted at
+are like flexible computers, jobs are submitted at
 the same time, chosen jobs are completed simulatenously,
-unchosen jobs will be submitted with the next round, no
+unchosen jobs are submitted with the next round, no
 indifference, and no externalities.
 
 \subsection{Proposed Algorithm}
