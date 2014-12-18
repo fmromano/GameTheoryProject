@@ -548,15 +548,15 @@ suggests areas of future research.
 
 \section{Background}
 \label{sec:background}
-A review about the stable marriage problem is needed
+A review of the stable marriage problem is presented here 
 to help the reader understand the proposed solution.
 The stable marriage problem is a one-to-one matching
 model used to effectively match two groups of agents
  together, such as men and women for a marriage.  
 These agents are two disjoint sets.  Each agent
 has a complete, strict, and  transitive preference over other
-individuals, which means the agent is not indifferent for any choices.  In 
-addition to this quality, each agent has a chance
+individuals, which means the agent is not indifferent for any choices.  
+In addition to this quality, each agent has a chance
 of being unmatched. For demonstration purposes,
 the two agent sets are men and women, whose sets are 
 \( \emph{W} = \{ {w_1}, {w_2}, \ldots {w_p} \} \) and
@@ -567,7 +567,7 @@ Their preferences are arranged and represented as ranked
 ordered lists.  An example of such a list is
 \( {p_m}_n ={w_2}, {w_4}, \ldots, \emptyset \),
 where \( {w_2} \) is the man's first choice for a partner, 
-\( {w_4} \) is the second, and so on.  In this case,the final 
+\( {w_4} \) is the second, and so on.  In this case, the final 
 choice represents when the man prefers to be single over 
 his possible choices.
 
@@ -582,7 +582,7 @@ of the other set or to the null set.  Agents' preferences over outcomes are
 determined only by their own preferences for certain partners.
 
 \emph{Definition 2}:  A matching \( \mu \) is stable if and only if it is individual rational and
-not black by any pair of agents.
+not blocked by any pair of agents.
 
 Individual rational and blocking pair are defined as followed.
 
@@ -600,26 +600,29 @@ rational, a matched set will be stable.  Therefore:
 
 \emph{Theorem 1}:  A stable matching pair exists for every marriage market.
 
-This theorem was proposed and proved by Gale and Shapley
-by using their deferred acceptance algorithm, which was proven in [1].
+This theorem was proposed and proven by Gale and Shapley
+through their deferred acceptance algorithm, as demonstrated in \cite{ref:GaleShap}.
 
 The college applications game extends the concepts behind stable
 marriage.  For a college applications game, the two sets of players are the
-institutions and the applicants.  Institutions can be matched to multiple
+institutions and the applicants.  A single institution can be matched to multiple
 applicants at one time.
 
 \emph{Theorem 2}:  Every applicant is at least as well off under the assignment
 given by the deferred acceptance procedure as he would be under any other
 stable arrangement.
 
-The end result will be a stable and optimal pairing between
- the institutions and the applicants.  This is also proven in [1].  One 
+The end result is a stable and optimal pairing between
+the institutions and the applicants.  This is also proven in \cite{ref:GaleShap}.  One 
 of the issues with the stable marriage problem and the college admissions problem
-is that they are applicant optimal.  In other works, the set who is being
+is that they are applicant optimal.  In other words, the set of agents being
 applied to, such as the women in the earlier example, are not guaranteed
-their optimal choices.  If the men and women switched, and the
-women were the ones proposing to the men, the men would
-not be guaranteed their optimal choices, either.
+their optimal choices. 
+There may exist another stable matching where at least one woman
+receives a more preferred matching and no women receive a less preferred matching.
+If the men and women switched, and the
+women were the ones proposing to the men, then it would be the men who are 
+not guaranteed their optimal choices.
 
 \section{Method Description}
 \label{sec:method}
@@ -992,47 +995,47 @@ and contributed to this written report.
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:GaleShap}
+\bibitem{ref:GaleShap}
 D.~Gale and L.~S. Shapley, ``College Admissions and the Stability
 of Marriage," \emph{Amer. Math. Mon.}, vol. 69, no. 1, pp. 9-14, 1962.
 
-\bibitem{IEEEhowto:RothSoto}
+\bibitem{ref:RothSoto}
 A.~E. Roth and M.~Sotomayor, \emph{Two-sided Matching: A Study in
 Game Theoretic Modeling and Analysis}, ser. Econometric Society
 Monograph.  Cambridge University Press, 1990, no. 18.
 
-\bibitem{IEEEhowto:Roth}
+\bibitem{ref:Roth}
 A.~E. Roth, ``Deferred Acceptance Algorithms: History, Theory,
 Practice, and Open Questions," \emph{Int. J. Game Theory},
 vol. 36, pp.537-569, 2008.
 
-\bibitem{IEEEhowto:Roth2}
+\bibitem{ref:Roth2}
 A.~E. Roth, ``Stability and Polarization of Interest in Job
 Matching," \emph{Econometrica}, vol. 53, pp.47-57, 1984.
 
-\bibitem{IEEEhowto:Manlove}
+\bibitem{ref:Manlove}
 D.~F. Manlove, R.~W. Irving, K.~Iwama, S.~Miyazaki, and Y.~Morita,
  ``Hard Variants of Stable Marriage," \emph{Elsevier Theoretical Computer Science},
 vol. 276, pp.261-279, 2002.
 
-\bibitem{IEEEhowto:Jiang}
+\bibitem{ref:Jiang}
 ``Analysis and Approximation of Optimal Co-Scheduling on Chip Multiprocessors"
 
-\bibitem{IEEEhowto:Xu}
+\bibitem{ref:Xu}
 ``Seen As Stable Marriages"
 
-\bibitem{IEEEhowto:Xu2}
+\bibitem{ref:Xu2}
 ``Egalitarian Stable Matching for VM Migration in Cloud Computing"
 
-\bibitem{IEEEhowto:Zou}
+\bibitem{ref:Zou}
 ``VirtualKnotter:  Online virtual machine shuffling for congestion resolving in
 virtualized datacenter"
 
 
-\bibitem{IEEEhowto:Dhillon}
+\bibitem{ref:Dhillon}
 ``Virtual Machine Coscheduling: A Game Theoretic Approach"
 
-\bibitem{IEEEhowto:Adolphs}
+\bibitem{ref:Adolphs}
 ``Distributed Selfish Load Balancing with Weights and Speeds"
 
 
