@@ -527,11 +527,11 @@ that is better for both the virtual machines and the jobs.  More will be stated
 in section three, Method Description.
 
 The paper will proceed as follows.  The second section will cover the
-background knowledge for matching games and work that is 
-related to virtual machines and cloud computing.  The third section
+background knowledge for matching games.  The third section
 will cover the problem formulation and proposed algorithm.  The 
-fourth section will cover the results.  The fifth section will
-be the conclusion of the work here.  The sixth section will
+fourth section will cover the results.  The fifth section will cover the
+literature that is similar to the work done in this paper.  The sixth section will
+be the conclusion of the work here.  The seventh section will
 give possible future routes this work can take.  
 
 \section{Background}
@@ -643,8 +643,8 @@ The proposed algorithm is based on a deferred acceptance
 college admissions algorithm with special modifications to optimize it for 
 the situation where the institutions have multiple quotas of different
 types and the applicants can fill multiple slots.
-
 \subsubsection{Algorithm}
+
 \begin{algorithm}
 \caption{Proposed Algorithm}\label{alg:PA}
 \KwData{Number of cores per VM available, Speed ratio matrix for jobs, Max threads used per job}
@@ -662,8 +662,6 @@ Initialize preference matrices and quotas\;
 
 Compile results and send to user\
 \end{algorithm}
-
-
 \underline{Step 1}: Calculate the preferences of the jobs (applicants) and the computers
 (institutions).
 A job's preference for a particular computer is determined simply:
