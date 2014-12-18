@@ -1,0 +1,130 @@
+
+@inproceedings{xu_seen_2011,
+	title = {Seen as stable marriages},
+	doi = {10.1109/INFCOM.2011.5935232},
+	abstract = {In this paper, we advocate the use of stable matching framework in solving networking problems, which are traditionally solved using utility-based optimization or game theory. Born in economics, stable matching efficiently resolves conflicts of interest among selfish agents in the market, with a simple and elegant procedure of deferred acceptance. We illustrate through one technical case study how it can be applied in practical scenarios where the impeding complexity of idiosyncratic factors makes defining a utility function difficult. Due to its use of generic preferences, stable matching has the potential to offer efficient and practical solutions to networking problems, while its mathematical structure and rich literature in economics provide many opportunities for theoretical studies. In closing, we discuss open questions when applying the stable matching framework.},
+	booktitle = {2011 Proceedings {IEEE} {INFOCOM}},
+	author = {Xu, Hong and Li, Baochun},
+	month = apr,
+	year = {2011},
+	keywords = {Complexity theory, Economics, Educational institutions, idiosyncratic factor, Internet, mathematical structure, networking problem, Optimization, Proposals, selfish agent, Stability analysis, stable marriages, stable matching framework, telecommunication networks, utility function},
+	pages = {586--590},
+	file = {IEEE Xplore Abstract Record:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/RTMVAHZH/articleDetails.html:text/html;IEEE Xplore Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/WSG6REAP/Xu and Li - 2011 - Seen as stable marriages.pdf:application/pdf}
+}
+
+@inproceedings{xu_egalitarian_2011,
+	title = {Egalitarian stable matching for {VM} migration in cloud computing},
+	doi = {10.1109/INFCOMW.2011.5928889},
+	abstract = {Virtual machine migration represents a new challenge to design efficient and practical migration algorithms that work well with hundreds or even thousands of {VMs} and servers. In our previous work, we advocated the use of a general stable matching framework from economics to solve networking problems, and showed that it offers unique advantages compared to utility-based optimization, using a simple procedure of deferred acceptance. In this paper, we apply this framework to the {VM} migration problem, and propose an egalitarian approach that finds a stable matching fair to both {VMs} and servers, instead of favoring either side as a result of the deferred acceptance procedure. Such an egalitarian stable matching that minimizes the total rank sum of the outcome is shown to be a sensible notion of fairness under mild conditions, and through simulations is demonstrated to offer superior results.},
+	booktitle = {2011 {IEEE} Conference on Computer Communications Workshops ({INFOCOM} {WKSHPS})},
+	author = {Xu, Hong and Li, Baochun},
+	month = apr,
+	year = {2011},
+	keywords = {cloud computing, computational complexity, deferred acceptance procedure, Educational institutions, egalitarian stable matching, migration algorithm, minimisation, networking problem, Optimization, polynomial time algorithm, Proposals, Servers, Stability analysis, total rank sum minimization, virtual machine migration, virtual machines, Virtual machining},
+	pages = {631--636},
+	file = {IEEE Xplore Abstract Record:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/5JTPQWT9/articleDetails.html:text/html;IEEE Xplore Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/JD94NFZ4/Xu and Li - 2011 - Egalitarian stable matching for VM migration in cl.pdf:application/pdf}
+}
+
+@inproceedings{wen_virtualknotter:_2012,
+	title = {{VirtualKnotter}: Online Virtual Machine Shuffling for Congestion Resolving in Virtualized Datacenter},
+	shorttitle = {{VirtualKnotter}},
+	doi = {10.1109/ICDCS.2012.25},
+	abstract = {Our measurements on production data center traffic together with recently reported results suggest that data center networks suffer from long-lived congestion caused by core network over subscription and unbalanced workload placement. In contrast to traditional traffic engineering approaches that optimize flow routing, in this paper, we explore the opportunity to address the continuous congestion via optimizing {VM} placement in virtualized data centers. To this end, we present Virtual Knotter, an efficient online {VM} placement algorithm to reduce congestion with controllable {VM} migration traffic as well as low time complexity. Our evaluation with both real and synthetic traffic patterns shows that Virtual Knotter performs close to the baseline algorithm in terms of link unitization, with only 5\%-10\% migration traffic of the baseline algorithm. Furthermore, Virtual Knotter decreases link congestion time by 53\% for the production data center traffic.},
+	booktitle = {2012 {IEEE} 32nd International Conference on Distributed Computing Systems ({ICDCS})},
+	author = {Wen, Xitao and Chen, Kai and Chen, Yan and Liu, Yongqiang and Xia, Yong and Hu, Chengchen},
+	month = jun,
+	year = {2012},
+	keywords = {baseline algorithm, Clustering algorithms, computer centres, continuous congestion, core network, data center networks, flow routing, Heuristic algorithms, link congestion, online virtual machine shuffling, online {VM} placement algorithm, Optimization, Partitioning algorithms, Production, production data center traffic, Routing, Servers, synthetic traffic pattern, time complexity, traffic engineering, unbalanced workload placement, virtualized data center, virtualized datacenter, {VirtualKnotter}, virtual machines, virtual reality, {VM} migration traffic},
+	pages = {12--21},
+	file = {IEEE Xplore Abstract Record:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/NBH267FE/articleDetails.html:text/html;IEEE Xplore Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/TGTKAUFJ/Wen et al. - 2012 - VirtualKnotter Online Virtual Machine Shuffling f.pdf:application/pdf}
+}
+
+@inproceedings{dhillon_virtual_2013,
+	title = {Virtual Machine Coscheduling: A Game Theoretic Approach},
+	shorttitle = {Virtual Machine Coscheduling},
+	doi = {10.1109/UCC.2013.47},
+	abstract = {When multiple virtual machines ({VMs}) are co scheduled on the same physical machine, they may undergo a performance degradation. The performance degradation is due to the contention for shared resources like last level cache, hard disk, network bandwidth etc. This can lead to service-level agreement violations and thereby customer dissatisfaction. The classical approach to solve the co scheduling problem involves a central authority which decides a co schedule by solving a constrained optimization problem with an objective function such as average performance degradation. In this paper, we use the theory of stable matchings to provide an alternate game theoretic perspective to the co scheduling problem wherein each {VM} selfishly tries to minimize its performance degradation. We show that the co scheduling problem can be formulated as a Stable Roommates Problem ({SRP}). Since certain instances of the {SRP} do not have any stable matching, we reduce the problem to the Stable Marriages Problem ({SMP}) via an initial approximation. Gale and Shapley proved that any instance of the {SMP} has a stable matching and can be found in quadratic time. From a game theoretic perspective, the {SMP} can be thought of as a matching game which always has a Nash equilibrium. There are distributed algorithms for both the {SRP} and {SMP} problems. A {VM} agent in a distributed algorithm need not reveal its preference list to any other {VM}. This allows each {VM} to have a private cost function. A principal advantage of this problem formulation is that it opens up the possibility of applying the rich theory of matching markets from game theory to address various aspects of the {VM} co scheduling problem such as stability, coalitions and privacy both from a theoretical and practical standpoint. We also propose a new workload characterization technique for a combination of compute and memory intensive workloads. The proposed technique uses a sentinel program and it requires only two runs per workload for characte- ization. {VMs} can use this technique in deciding their partner preference ranks in the {SRP} and {SMP} problems. The characterization technique has also been used in proposing two new centralized {VM} co scheduling algorithms whose performance is close to the optimal Blossom algorithm.},
+	booktitle = {2013 {IEEE}/{ACM} 6th International Conference on Utility and Cloud Computing ({UCC})},
+	author = {Dhillon, J.S. and Purini, S. and Kashyap, S.},
+	month = dec,
+	year = {2013},
+	keywords = {average performance degradation, central authority, centralized {VM} coscheduling algorithms, constrained optimization problem, Cost function, customer dissatisfaction, Degradation, distributed algorithms, Games, game theoretic approach, game theory, hard disk, initial approximation, last level cache, Linear programming, Measurement, memory intensive workloads, Nash equilibrium, network bandwidth, objective function, optimal Blossom algorithm, optimisation, Partitioning algorithms, partner preference ranks, performance degradation minimization, physical machine, private cost function, quadratic time, Scheduling, sentinel program, service-level agreement violations, {SMP} problem, {SRP} problem, stable marriages problem, stable roommates problem, virtual machine coscheduling, virtual machines, Virtual machining, {VM} agent, workload characterization, workload characterization technique},
+	pages = {227--234},
+	file = {IEEE Xplore Abstract Record:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/335627ND/articleDetails.html:text/html;IEEE Xplore Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/NDSPATQ3/Dhillon et al. - 2013 - Virtual Machine Coscheduling A Game Theoretic App.pdf:application/pdf}
+}
+
+@inproceedings{adolphs_distributed_2012,
+	address = {New York, {NY}, {USA}},
+	series = {{PODC} '12},
+	title = {Distributed Selfish Load Balancing with Weights and Speeds},
+	isbn = {978-1-4503-1450-3},
+	doi = {10.1145/2332432.2332460},
+	abstract = {In this paper we consider neighborhood load balancing in the context of selfish clients. We assume that a network of n processors is given, with m tasks assigned to the processors. The processors may have different speeds and the tasks may have different weights. Every task is controlled by a selfish user. The objective of the user is to allocate his/her task to a processor with minimum load, where the load of a processor is defined as the weight of its tasks divided by its speed. We investigate a concurrent probabilistic protocol which works in sequential rounds. In each round every task is allowed to query the load of one randomly chosen neighboring processor. If that load is smaller than the load of the task's current processor, the task will migrate to that processor with a suitably chosen probability. Using techniques from spectral graph theory we obtain upper bounds on the expected convergence time towards approximate and exact Nash equilibria that are significantly better than previous results for this protocol. We show results for uniform tasks on non-uniform processors and the general case where the tasks have different weights and the machines have speeds. To the best of our knowledge, these are the first results for this general setting.},
+	booktitle = {Proceedings of the 2012 {ACM} Symposium on Principles of Distributed Computing},
+	publisher = {{ACM}},
+	author = {Adolphs, Clemens P.J. and Berenbrink, Petra},
+	year = {2012},
+	keywords = {convergence, equilibrium, load balancing, reallocation},
+	pages = {135--144},
+	file = {ACM Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/4IMUWCM2/Adolphs and Berenbrink - 2012 - Distributed Selfish Load Balancing with Weights an.pdf:application/pdf}
+}
+
+@inproceedings{jiang_analysis_2008,
+	address = {New York, {NY}, {USA}},
+	series = {{PACT} '08},
+	title = {Analysis and Approximation of Optimal Co-scheduling on Chip Multiprocessors},
+	isbn = {978-1-60558-282-5},
+	doi = {10.1145/1454115.1454146},
+	abstract = {Cache sharing among processors is important for Chip Multiprocessors to reduce inter-thread latency, but also brings cache contention, degrading program performance considerably. Recent studies have shown that job co-scheduling can effectively alleviate the contention, but it remains an open question how to efficiently find optimal co-schedules. Solving the question is critical for determining the potential of a co-scheduling system. This paper presents a theoretical analysis of the complexity of co-scheduling, proving its {NP}-completeness. Furthermore, for a special case when there are two sharers per chip, we propose an algorithm that finds the optimal co-schedules in polynomial time. For more complex cases, we design and evaluate a sequence of approximation algorithms, among which, the hierarchical matching algorithm produces near-optimal schedules and shows good scalability. This study facilitates the evaluation of co-scheduling systems, as well as offers some techniques directly usable in proactive job co-scheduling.},
+	booktitle = {Proceedings of the 17th International Conference on Parallel Architectures and Compilation Techniques},
+	publisher = {{ACM}},
+	author = {Jiang, Yunlian and Shen, Xipeng and Chen, Jie and Tripathi, Rahul},
+	year = {2008},
+	keywords = {cache contention, {CMP} scheduling, co-scheduling, perfect matching},
+	pages = {220--229},
+	file = {ACM Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/6HCE8RXF/Jiang et al. - 2008 - Analysis and Approximation of Optimal Co-schedulin.pdf:application/pdf}
+}
+
+@article{manlove_hard_2002,
+	title = {Hard variants of stable marriage},
+	volume = {276},
+	issn = {0304-3975},
+	doi = {10.1016/S0304-3975(01)00206-7},
+	abstract = {The Stable Marriage Problem and its many variants have been widely studied in the literature (Gusfield and Irving, The Stable Marriage Problem: Structure and Algorithms, {MIT} Press, Cambridge, {MA}, 1989; Roth and Sotomayor, Two-sided matching: a study in game-theoretic modeling and analysis, Econometric Society Monographs, vol. 18, Cambridge University Press, Cambridge, 1990; Knuth, Stable Marriage and its Relation to Other Combinatorial Problems, {CRM} Proceedings and Lecture Notes, vol. 10, American Mathematical Society, Providence, {RI}, 1997), partly because of the inherent appeal of the problem, partly because of the elegance of the associated structures and algorithms, and partly because of important practical applications, such as the National Resident Matching Program (Roth, J. Political Economy 92(6) (1984) 991) and similar large-scale matching schemes. Here, we present the first comprehensive study of variants of the problem in which the preference lists of the participants are not necessarily complete and not necessarily totally ordered. We show that, under surprisingly restrictive assumptions, a number of these variants are hard, and hard to approximate. The key observation is that, in contrast to the case where preference lists are complete or strictly ordered (or both), a given problem instance may admit stable matchings of different sizes. In this setting, examples of problems that are hard are: finding a stable matching of maximum or minimum size, determining whether a given pair is stable—even if the indifference takes the form of ties on one side only, the ties are at the tails of lists, there is at most one tie per list, and each tie is of length 2; and finding, or approximating, both an ‘egalitarian’ and a ‘minimum regret’ stable matching. However, we give a 2-approximation algorithm for the problems of finding a stable matching of maximum or minimum size. We also discuss the significant implications of our results for practical matching schemes.},
+	number = {1–2},
+	journal = {Theoretical Computer Science},
+	author = {Manlove, David F and Irving, Robert W and Iwama, Kazuo and Miyazaki, Shuichi and Morita, Yasufumi},
+	month = apr,
+	year = {2002},
+	keywords = {Approximation algorithms, Indifference, {NP}-completeness, Stable marriage problem, Ties},
+	pages = {261--279},
+	file = {ScienceDirect Full Text PDF:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/W4PUGU43/Manlove et al. - 2002 - Hard variants of stable marriage.pdf:application/pdf;ScienceDirect Snapshot:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/CFI3AGFN/S0304397501002067.html:text/html}
+}
+
+@article{roth_stability_1984,
+	title = {Stability and Polarization of Interests in Job Matching},
+	volume = {52},
+	issn = {00129682},
+	doi = {10.2307/1911460},
+	number = {1},
+	journal = {Econometrica},
+	author = {Roth, Alvin E.},
+	month = jan,
+	year = {1984},
+	pages = {47},
+	file = {Stability and Polarization of Interests in Job Matching on JSTOR:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/Z9TEDGAN/1911460.html:text/html}
+}
+
+@article{gale_college_1962,
+	title = {College Admissions and the Stability of Marriage},
+	volume = {69},
+	issn = {00029890},
+	doi = {10.2307/2312726},
+	number = {1},
+	journal = {The American Mathematical Monthly},
+	author = {Gale, D. and Shapley, L. S.},
+	month = jan,
+	year = {1962},
+	pages = {9},
+	file = {College Admissions and the Stability of Marriage on JSTOR:/home/fromano/.mozilla/firefox/kjb2mxrv.default/zotero/storage/FIVUFN2H/2312726.html:text/html}
+}
