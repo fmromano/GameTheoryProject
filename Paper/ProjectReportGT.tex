@@ -957,25 +957,28 @@ It reflects how frequently each job is executed the best it could be on a given 
 \end{table}
 % End Comparison Table III
 
-These algorithms were compared in three tests.  For each test, 
+These algorithms were compared in three different tests.  
+For each test, 
 a set of randomly defined inputs were entered into each algorithm 
-for each iteration.  During these iterations, the metrics were sampled, 
-averaged, and stored until all of the runs were finished.  All random
- numbers were generated using the uniform random function in MATLAB.  
+for each iteration.  
+During these iterations, the metrics were sampled, 
+averaged, and stored until all of the simulations were finished.  
+All random
+numbers were generated using the uniform random function in MATLAB.  
 The parameters for the inputs of the comparison function for each 
 iteration can be found in Table I.
 
-The number of simulations represents how many runs the comparison 
+The number of simulations represents how many simulations the comparison 
 program executed.  The number of VMs parameter decided the minimum 
 and maximum number of VMs, from 1 to a positive integer, during an iteration.  
 The number of jobs parameter decided the maximum and minimum number 
 of jobs during each iteration.  The number of core types parameter decided 
-the minimum and maximum number of different cores types that would be 
+the minimum and maximum number of different core types that would be 
 available for the user.  The maximum number of cores per type parameter 
 decided how many of which type of core were available for a job.  
 The maximum number of threads per job parameter decided how big the
  job could be and how many threads could be matched to available cores.  
-The speed ratios parameter decided how fast each job would be on every core type.
+The speed ratios parameter decided how fast each job would be on each core type.
 
 
 
