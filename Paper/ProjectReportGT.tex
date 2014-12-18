@@ -495,46 +495,59 @@ or only minor regression compared to other approaches.
 
 
 \section{Introduction}
-Cloud computing is a system that allows ubiquitous IT services,
+\label{sec:intro}
+Because cloud computing is a cost-effective
+and flexible system for handling data and programs,
+it allows ubiquitous IT services,
 ranging from online social networking services to infrastructure
-outsources.  This is because cloud computing is expected to
-be a cost-effective and flexible way to handle data and programs.
+outsources.  
 These cloud computing services are packaged in the form of
-virtual machines through the use of virtualization technology.
-Virtualization technology allows for computing technologies
+virtual machines (VMs) through virtualization technology,
+which allows for computing technologies
 to be virtualized by emulating processors, main memory, storage,
-and networking devices [resource needed].  The final product after this virtualization
-is the virtual machine.
+and networking devices [resource needed].  
+%The final product after this virtualization is the virtual machine.
 
-One of the benefits of virtual machines, especially ubiquitous
-ones, is they can be configured to suit a specific application's
+A primary benefit of VMs
+is they can be configured to suit a specific application's
 needs, such as application isolation, security requirements,
 service level-agreements, and computational performance.  [resource needed]
-These virtual machines and cloud computing servers
+These VMs and cloud computing servers
 are still housed on powerful physical machines at this point.
-[need to figure out the logic between here and our problem...]
+When, due to timing constraints or other restrictions,  each VMs resources are static, 
+sourcing jobs to individual VMs involves optimizing
+job-VM matchings to maximize resource utilization and
+speed of job completion.
+The problem is similar to the assignment of jobs to 
+distinct compute clusters present on a campus network
+where the clusters cannot exchange resources.
 
-This project is focused on turning a simple virtual machine job assignment
-problem into a college admissions game.  The jobs will be the applicants,
-and the virtual machines will be institutions.  The jobs will apply for spots
-on the virtual machines until either there are no more jobs in the 
-queue, or there are no more virtual machines created and availabe for the
-users at this time.  It is assumed that the virtual machines take a long
-enough time to create that a user will not want to just make one
-once all of the already made virtual machines are taken.  In this paper,
+This project focuses on turning a simple VM job assignment
+problem into a college admissions game.  The jobs act as applicants,
+and the VMs as institutions.  The jobs apply for spots
+on the VMs until either there are no more jobs in the 
+queue, or there are no more VMs created and availabe for the
+users at the time.  
+It is assumed that VM creation is a significantly 
+involved process such that a user would 
+wait for an existing VM to become available
+rather than instantiate a new one.
+In this paper,
 a computer-optimal algorithm will be proposed to provide a solution
-that is better for both the virtual machines and the jobs.  More will be stated
-in section three, Method Description.
+that is better for both the virtual machines and the jobs.  
+%More will be stated in section three, Method Description.
 
-The paper will proceed as follows.  The second section will cover the
-background knowledge for matching games.  The third section
-will cover the problem formulation and proposed algorithm.  The 
-fourth section will cover the results.  The fifth section will cover the
-literature that is similar to the work done in this paper.  The sixth section will
-be the conclusion of the work here.  The seventh section will
-give possible future routes this work can take.  
+The paper proceeds as follows:  Section \ref{sec:background} covers 
+background knowledge for matching games.  Section \ref{sec:method}
+covers the problem formulation and proposed algorithm. Section
+\ref{sec:results} discusses simulation results.  Section \ref{sec:related} 
+reviews literature similar to the work of this paper.  
+Section \ref{sec:conclusion} concludes the present work  
+and Section \ref{sec:future} 
+suggests areas of future research.
 
 \section{Background}
+\label{sec:background}
 A review about the stable marriage problem is needed
 to help the reader understand the proposed solution.
 The stable marriage problem is a one-to-one matching
@@ -609,6 +622,7 @@ women were the ones proposing to the men, the men would
 not be guaranteed their optimal choices, either.
 
 \section{Method Description}
+\label{sec:method}
 The problem formulation and proposed algorithm will be
 described in this section.
 
@@ -813,6 +827,7 @@ to be able to use more processors.
 
 
 \section{Results and Discussion}
+\label{sec:results}
 Show results and discuss what they represent.
 
 % Inputs Table
@@ -898,6 +913,7 @@ Show results and discuss what they represent.
 % End Comparison Table III
 
 \section{Related Work}
+\label{sec:related}
 Variations of this work can be found, and they have been extended to handle problems in multiple areas of virtualization and cloud computing.  These problem include topics such as virtual machine co-scheduling, general networking situations were defining utility functions may be difficult, VM migration in cloud computing, distributed loads for VMs, and VM shuffling for congestion reasons.
 
 In “Seen As Stable Marriages,” the authors prepared the background for matching theory to be applied to networking problems, such as ones where utilities difficult or impossible to find.  Instead of trying to pursue optimality, they aimed for stability.  They developed a possible solution for non-centralized coordination between ISP’s in an ISP peering example.  The simplicity that Matching Theory affords, along with privacy benefits, makes this approach interesting.  However, the issue with their work is that it is polarized towards the proposing side of the two parties.  
@@ -907,9 +923,11 @@ In their next work, “Egalitarian Stable Matching for VM Migration in Cloud Com
 
 
 \section{Conclusion}
+\label{sec:conclusion}
 The conclusion goes here.
 
 \section{Future Work}
+\label{sec:future}
 This paper studies an interesting extension of the college admissions
 algorithm where the institutions have multiple quotas of different types
 and the applicants can fill any of a particular instution's quotas.
