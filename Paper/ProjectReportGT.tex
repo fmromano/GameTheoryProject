@@ -518,10 +518,7 @@ fourth section will cover the results.  The fifth section will
 be the conclusion of the work here.  The sixth section will
 give possible future routes this work can take.  
 
-\section{Background and Related Work}
-A note:  the math needs to be cleaned up.  In order to save time,
-editing the equations will happen last.
-
+\section{Background}
 A review about the stable marriage problem is needed
 to help the reader understand the proposed solution.
 The stable marriage problem is a one-to-one matching
@@ -532,8 +529,7 @@ has a complete, strict, and  transitive preference over other
 individuals, which means the agent is not indifferent for any choices.  In 
 addition to this quality, each agent has a chance
 of being unmatched. For demonstration purposes,
-the two agent sets are men and women, whose sets
-are 
+the two agent sets are men and women, whose sets are 
 \( \emph{W} = \{ {w_1}, {w_2}, \ldots {w_p} \} \) and
 \( \emph{M} =\{ {m_1}, {m_2}, \ldots {m_n} \} \), 
 where \emph{p} does not have to equal \emph{n}.
@@ -576,10 +572,25 @@ rational, a matched set will be stable.  Therefore:
 \emph{Theorem 1}:  A stable matching pair exists for every marriage market.
 
 This theorem was proposed and proved by Gale and Shapley
-by using their deferred acceptance algorithm, which can be seen [1].
-[I'm debating on doing a quick proof].
+by using their deferred acceptance algorithm, which was proven in [1].
 
+The college applications game extends the concepts behind stable
+marriage.  For a college applications game, the two sets of players are the
+institutions and the applicants.  Institutions can be matched to multiple
+applicants at one time.
 
+\emph{Theorem 2}:  Every applicant is at least as well off under the assignment
+given by the deferred acceptance procedure as he would be under any other
+stable arrangement.
+
+The end result will be a stable and optimal pairing between
+ the institutions and the applicants.  This is also proven in [1].  One 
+of the issues with the stable marriage problem and the college admissions problem
+is that they are applicant optimal.  In other works, the set who is being
+applied to, such as the women in the earlier example, are not guaranteed
+their optimal choices.  If the men and women switched, and the
+women were the ones proposing to the men, the men would
+not be guaranteed their optimal choices, either.
 
 \section{Method Description}
 High level description if needed.
@@ -768,6 +779,9 @@ to be able to use more processors.
 
 \section{Results and Discussion}
 Show results and discuss what they represent.
+
+\section{Related Work}
+
 
 \section{Conclusion}
 The conclusion goes here.
