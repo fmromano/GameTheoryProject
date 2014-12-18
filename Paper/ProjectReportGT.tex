@@ -956,13 +956,28 @@ It reflects how frequently each job is executed the best it could be on a given 
 
 \section{Related Work}
 \label{sec:related}
-Variations of this work can be found, and those variations handle a variety of problems in multiple areas of virtualization and cloud computing.  These problem include topics such as virtual machine co-scheduling, general networking situations were defining utility functions may be difficult, VM migration in cloud computing, distributed loads for VMs, and VM shuffling for congestion reasons.  A few of these examples will be discussed.
+Variations of this work can be found, 
+handling a variety of problems in multiple areas of virtualization and cloud computing.  
+These problems include topics such as virtual machine co-scheduling, general networking situations where defining utility functions may be difficult, 
+VM migration in cloud computing, distributed loads for VMs, and VM shuffling for congestion reduction.  
+A few of these examples these works are discussed here.
 
-In "Seen As Stable Marriages," the authors prepared the background for matching theory to be applied to networking problems, such as ones where utilities difficult or impossible to find.  Instead of trying to pursue optimality, they aimed for stability.  They developed a possible solution for non-centralized coordination between ISP’s in an ISP peering example.  The simplicity that Matching Theory affords, along with privacy benefits, makes this approach interesting.  However, the issue with their work is that it is polarized towards the proposing side of the two parties.  
+In \cite{xu_seen_2011}, the authors prepared the background to apply matching theory to networking problems, such as those where utility functions are difficult or impossible to find.
+Rather than pursuing optimality, they aimed for stability and developed a possible solution for non-centralized coordination between ISPs in an ISP peering example.  The simplicity that Matching Theory affords, along with privacy benefits, makes this approach interesting.  However, their work is polarized towards the proposing side of the two parties.  
 
-This issue was addressed in their next work, "Egalitarian Stable Matching for VM Migration in Cloud Computing," the authors sought to reduce the polarization issues they had in the previous paper, similar to what was done in this paper.  The problem they examined was server maintenance scenario, where VM migration is triggered by periodic upgrades, maintenances, and hardware failures.  They introduce a current match dissatisfaction score, a metric for each agent, which was used to encourage a more egalitarian solution.  This dissatisfaction score was derived from how dissatisfied each agent was in its current pair.  The results from this work showed that the overall dissatisfaction was reduced while keeping the stability matching theory offers.  The drawback behind this work is that their algorithm performed poorly when the total quotas of the servers was close to the total number of migrating VMs.
+This issue was addressed in their next work \cite{xu_egalitarian_2011} where the authors sought to reduce the polarization issues they had in the previous paper, similar to the approach in this project.  
+The problem they examined was server a maintenance scenario, where VM migration is triggered by periodic upgrades, maintenances, and hardware failures.  
+They introduce a current match dissatisfaction score, a metric for each agent used to encourage a more egalitarian solution.  
+This dissatisfaction score was derived from each agents individual dissatisfaction with its current pair.  
+The results showed that the overall dissatisfaction was reduced while maintaining stability.  
+The drawback behind this work is that their algorithm performed poorly when the number of quotas of the servers was close to the total number of migrating VMs.
 
-A problem faced in virtualization technology is the limits introduced by the physical machines the virtual machines have to run on.  Dhillon, Purini, and Kashyap attempt to handle this performance degradation by using matching theory to create a co-scheduling algorithm.  They defined this degradation issue as a stable roommate problem, where the VMs are paired together on a machine based on their compatibility and their likelihood of interfering with each other.  Their work was then compared with other algorithms that handled co-scheduling.  Their work showed that the stable marriage and stable roommates problems provide no improvement over current technology available for co-scheduling.  However, this work does give a starting point for possible variants of the stable matching and stable roommates problems.
+A problem faced in virtualization technology is the limits introduced by the physical machines that host the VMs.  
+Dhillon, Purini, and Kashyap \cite{dhillon_virtual_2013} attempt mitigate this performance degradation using matching theory to create a co-scheduling algorithm.  
+They defined the degradation issue as a stable roommate problem, 
+where the VMs are paired together on a machine based on their compatibility and their likelihood of interfering with each other.  
+Their work was then compared with other algorithms that handled co-scheduling and showed that the stable marriage and stable roommates problems provide no improvement over current technology available for co-scheduling.  
+However, their work opens the way for approaches based on variants of the stable matching and stable roommates problems.
 
 
 
