@@ -484,15 +484,66 @@ virtual machine job assignment problem.
 
 
 
-\section{Related Work}
-Most similar topics:  VM Cosheduling and 
-VM Migration papers.
+\section{Background and Related Work}
+A note:  the math needs to be cleaned up.  In order to save time,
+editing the equations will happen last.
 
-Related to VM Coscheduling: Distributed Selfish Load
-Balancing
+A review about the stable marriage problem is needed
+to help the reader understand the proposed solution.
+The stable marriage problem is a one-to-one matching
+model used to effectively match two groups of agents
+ together, such as men and women for a marriage.  
+These agents are two disjoint sets.  Each agent
+has a complete, strict, and  transitive preference over other
+individuals, which means the agent is not indifferent for any choices.  In 
+addition to this quality, each agent has a chance
+of being unmatched. For demonstration purposes,
+the two agent sets are men and women, whose sets
+are 
+\( \emph{W} = \{ {w_1}, {w_2}, \ldots {w_p} \} \) and
+\( \emph{M} =\{ {m_1}, {m_2}, \ldots {m_n} \} \), 
+where \emph{p} does not have to equal \emph{n}.
 
-Related to VM Migration:  Seen As Stable Marriage and
-Online VM Shuffling (continuation of VM Migration work).
+Their preferences are arranged and represented as ranked 
+ordered lists.  An example of such a list is
+\( {p_m}_n ={w_2}, {w_4}, \ldots, \emptyset \),
+where \( {w_2} \) is the man's first choice for a partner, 
+\( {w_4} \) is the second, and so on.  In this case,the final 
+choice represents when the man prefers to be single over 
+his possible choices.
+
+\emph{Definition 1}:  An outcome is a matching
+ \( \mu \) : \emph{M} \( \times \)  \emph{W} \( \rightarrow \)  \emph{M} \( \times \)  \emph{W} such that
+\emph{w} = \( \mu(m) \) if and only if 
+\emph{m} = \( \mu(w) \) \( \in W \cup \emptyset \), \( \mu(m) \in M \cup \emptyset \)
+for all \emph{m, w}.
+
+This implies that agents from one set are matched to either the agents
+of the other set or to the null set.  Agents' preferences over outcomes are
+determined only by their own preferences for certain partners.
+
+\emph{Definition 2}:  A matching \( \mu \) is stable if and only if it is individual rational and
+not black by any pair of agents.
+
+Individual rational and blocking pair are defined as followed.
+
+\emph{Definition 3}:  A matiching set is individual rational to all agents if and only if
+there does not exist an agent \emph{i} who prefers being unmatched to being
+matched.
+
+\emph{Definition 4}:  A matching \( \mu \) is blocked by a pair of agents \emph{(m,w)} if they
+prefer each other to the partner they receive at u.  That is, \emph{w} \(\succ_m \) \( \mu (m) \)
+and \emph{m} \(\succ_w \) \( \mu (w) \).  Such a pair is called a blocking set.
+
+This means that as long as a matching is not blocked and a matching set is individually
+rational, a matched set will be stable.
+
+\emph{Theorem 1}:  A stable matching pair exists for every marriage market.
+
+This theorem was proposed and solved by Gale and Shapley
+by using their deferred acceptance algorithm.
+
+
 
 \section{Method Description}
 High level description if needed.
