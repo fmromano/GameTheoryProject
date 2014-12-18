@@ -682,7 +682,7 @@ Compile results and send to user\
 \end{algorithm}
 \underline{Step 1}: Calculate the preferences of the jobs (applicants) and the VMs
 (institutions).
-A job's preference for a particular computer is determined simply:
+A job's preference for a particular VM is determined simply:
 given the processors available on each VM, if a job would peform 
 faster on one VM than another, then the first VM is preferred over the second. 
 Given the relative speeds of each processor at performing a particular job,
@@ -836,11 +836,11 @@ to be able to use more processors.
 The proposed algorithm was compared to three alternative algorithms.  
 The first was a simple matching scheme where jobs are matched with their preferred VM.  
 This case would be similar to a VM lab where each user applies for a VM without knowing how many others are also applying.
-This scheme disregards the availability of resources on the computer, which means some jobs may be matched to the a computer, but then are unable to complete in a reasonable time due to lack of resources.  
+This scheme disregards the availability of resources on the VM, which means some jobs may be matched to the a VM, but then are unable to complete in a reasonable time due to lack of resources.  
 This is the scheme to which the other three variations of the deferred acceptance algorithm, including the proposed algorithm, are compared.
 
 The second scheme involves a deferred acceptance routine where the quotas depend on how many jobs are listed and how many VMs are available.  
-It takes these two values and divides the jobs among the available computers.  
+It takes these two values and divides the jobs among the available VMs.  
 This scheme is intended to favor the jobs that are able to be serviced by the VM.  
 However, this case faces the same issue as simple matching: there may not be enough resources for all of the matched jobs.  
 
