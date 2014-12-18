@@ -194,6 +194,8 @@
 % *** SPECIALIZED LIST PACKAGES ***
 %
 %\usepackage{algorithmic}
+\usepackage{algpseudocode}
+\usepackage[]{algorithm2e}
 % algorithmic.sty was written by Peter Williams and Rogerio Brito.
 % This package provides an algorithmic environment fo describing algorithms.
 % You can use the algorithmic environment in-text or within a figure
@@ -607,7 +609,9 @@ women were the ones proposing to the men, the men would
 not be guaranteed their optimal choices, either.
 
 \section{Method Description}
-High level description if needed.
+The problem formulation and proposed algorithm will be
+described in this section.
+
 \subsection{Problem Formulation}
 The problem this paper is exploring is how to optimize job 
 assigment to separate computer clusters.  Each of these
@@ -641,6 +645,25 @@ the situation where the institutions have multiple quotas of different
 types and the applicants can fill multiple slots.
 
 \subsubsection{Algorithm}
+\begin{algorithm}
+\caption{Proposed Algorithm}\label{alg:PA}
+\KwData{Number of cores per VM available, Speed ratio matrix for jobs, Max threads used per job}
+\KwResult{Matrix with jobs matched to VMs}
+
+Initialize preference matrices and quotas\;
+
+\While{Either jobs or VMs are left}{
+	1. Set quota to 1 for each non-full VM\;
+	2. Run Deferred Acceptance Algorithm\;
+	3. Choose job who used the most of the computer resources and keep it\;
+	4. Save this job to the results matrix\;
+	5. Update preference matrices and core availability matrix\;
+}
+
+Compile results and send to user\
+\end{algorithm}
+
+
 \underline{Step 1}: Calculate the preferences of the jobs (applicants) and the computers
 (institutions).
 A job's preference for a particular computer is determined simply:
@@ -877,6 +900,12 @@ Show results and discuss what they represent.
 % End Comparison Table III
 
 \section{Related Work}
+Variations of this work can be found, and they have been extended to handle problems in multiple areas of virtualization and cloud computing.  These problem include topics such as virtual machine co-scheduling, general networking situations were defining utility functions may be difficult, VM migration in cloud computing, distributed loads for VMs, and VM shuffling for congestion reasons.
+
+In “Seen As Stable Marriages,” the authors prepared the background for matching theory to be applied to networking problems, such as ones where utilities difficult or impossible to find.  Instead of trying to pursue optimality, they aimed for stability.  They developed a possible solution for non-centralized coordination between ISP’s in an ISP peering example.  The simplicity that Matching Theory affords, along with privacy benefits, makes this approach interesting.  However, the issue with their work is that it is polarized towards the proposing side of the two parties.  
+
+In their next work, “Egalitarian Stable Matching for VM Migration in Cloud Computing,” the authors sought to reduce the polarization issues they had in the previous paper, similar to what was done in this paper.  The problem they examined was server maintenance scenario, where VM migration is triggered by periodic upgrades, maintenances, and hardware failures.  They introduce a current match dissatisfaction score, a metric for each agent, which was used to encourage a more egalitarian solution.  This dissatisfaction score was derived from how dissatisfied each agent was in its current pair.  The results from this work showed that the overall dissatisfaction was reduced while keeping the stability matching theory offers.  The main issue with this work is that their algorithm performed poorly when the total quotas of the servers was close to the total number of migrating VMs.
+
 
 
 \section{Conclusion}
