@@ -831,7 +831,18 @@ to be able to use more processors.
 
 \section{Results and Discussion}
 \label{sec:results}
-Show results and discuss what they represent.
+The proposed algorithm was compared to three different algorithms.  The first was a simple matching scheme, where jobs are matched with their preferred VM.  This case would be similar to a VM lab where each user had to apply for a VM without knowing how many other people were applying.  This scheme disregards the availability of resources on the computer, which means some jobs may be matched to the computer, but they are unable to complete in a reasonable time due to lack of resources.  This is the scheme all of the other three variations of the deferred acceptance algorithm, including the proposed algorithm, are compared to.
+
+The second scheme involved a deferred acceptance routine where the quotas depended on how many jobs were listed and how many VMs were available.  It will take those two values and divide the jobs among the available computers.  This scheme is intended to favor the jobs that are able to be serviced by the VM.  However, this case faces the same issue as simple matching, where there may not be enough resources for all of the matched jobs.  
+
+The third algorithm is another deferred acceptance algorithm variant.  For this scheme, the deferred acceptance algorithm will match a set of jobs to a set of VMs for each iteration.  This is handled by setting the quotas to one for each iteration until a VM is filled.  Once a VM is filled, its quota is set to 0, and no more jobs can be matched to that VM.  Each iteration, the preferences for the VM and the jobs are updated in order to reflect which jobs are matched and what resources are still available.  This process will end once all of the jobs are matched or all of the VMs are filled.  This algorithm is expected to the most fair out of the three because it will not match jobs to a VM that is not able to complete it.
+  
+Five different metrics were used to observe the performance of the proposed algorithm compared to the simple matching algorithm and two different versions of the deferred acceptance algorithm.  The metrics were average time scores, average percent of jobs assigned to each VM, average percent of available threads utilized for a job, the average number of cores used per VM, and a resource score that represented how well the jobs were able to utilize their preferred cores.  The average time score is based on the speed ratios for each job depending on the core type.  For this number, higher scores are better, but they can only be compared within a run.  To enable comparisons across the different runs, these values were turned into percent changes.  The simple matching scheme was set as the baseline.  
+
+The next metric was the average percent of jobs assigned to a VM.  This percent represents the number of jobs that were successfully assigned to a VM before the number of available cores were depleted.  The average percent of available threads utilized for a job was meant to represent how efficient each scheme was.  A job did not need to have all of its threads used to be completed, but the job would be finished faster if more threads were used.  The average number of cores used per VM is meant to represent how effectively the VM resources were used.  For this paper, the VMs prefer to be completely utilized.  If a VM was unmatched with any jobs, then this score would reflect that.  Finally, the last score is the resource score, which represents how well the jobs were distributed among the core types.  This score reflects how often each job was executed the best it could be on a computer. 
+
+
+
 
 % Inputs Table
 \begin{table}[h]
