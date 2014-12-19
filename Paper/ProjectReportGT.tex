@@ -997,7 +997,7 @@ used for comparisons are defined as percentages.
 
 
 \subsection{Comparison I:  Normal amount of VMs to jobs}
-In this comparison case, the simple matching performed worse compared to 
+Table \ref{compI} shows that, in this comparison case, the simple matching performed worse compared to 
 the other approaches
 on average available threads used, average cores used, and average resource
  score.  
@@ -1012,25 +1012,27 @@ The proposed algorithm performed its jobs the fastest.
 \subsection{Comparison II: More VM resources compared to jobs}
 
 For this comparison, the second deferred acceptance algorithm does as well as or
- better than the other algorithms.  The proposed algorithm and the first deferred
- acceptance algorithms performed similarly on most metrics except average resource 
+better than the other algorithms.  As can be seen in Table \ref{compII} on page
+\pageref{compII},
+the proposed algorithm and the first deferred
+acceptance algorithms performed similarly on most metrics except average resource 
 score and average percent change in the speed score.  The proposed algorithm did
- better for average percent change in the speed score, but worse for average 
+better for average percent change in the speed score, but worse for average 
 resource score.  The simple matching algorithm performed similarly to the first
- deferred acceptance algorithm on everything except percent of jobs assigned.
+deferred acceptance algorithm on everything except percent of jobs assigned.
 
 \subsection{Comparison III: More jobs than VM resources available}
 
 For this case, the second deferred acceptance algorithm performed the best in
- everything except percent jobs assigned and average resource score.  The first 
+ everything except percent jobs assigned and average resource score, as shown
+ in Table \ref{compIII} on page \pageref{compIII}.  The first 
 deferred acceptance algorithm performed the best in those two categories. 
- The proposed algorithm’s results lie between the first and second deferred 
+ The proposed algorithm's results lie between the first and second deferred 
 acceptance results.  The simple matching performed worse than the other 
 algorithms on average for this case.
 
 
 \subsection{Discussion of Results}
-
 In all cases, the first deferred acceptance algorithm average resource 
 score and percent of jobs assigned was usually the highest or second
  highest compared to the other algorithms.  It was also the slowest at 
