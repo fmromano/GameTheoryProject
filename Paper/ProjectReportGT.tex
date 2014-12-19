@@ -872,8 +872,46 @@ This score would also reflect whether a VM is matched to any jobs at all.
 Finally, the last score is the resource score, which represents how well the jobs are distributed among the different core types.  
 It reflects how frequently each job is executed the best it could be on a given VM. 
 
+These algorithms were compared in three different tests.  
+For each test, 
+a set of randomly defined inputs were entered into each algorithm 
+for each iteration.  
+During these iterations, the metrics were sampled, 
+averaged, and stored until all of the simulations were finished.  
+All random
+numbers were generated using the uniform random function in MATLAB.  
+The parameters for the inputs of the comparison function for each 
+iteration can be found in Table I.
 
+The number of simulations represents how many simulations the comparison 
+program executed.  The number of VMs parameter decided the minimum 
+and maximum number of VMs, from 1 to a positive integer, during an iteration.  
+The number of jobs parameter decided the maximum and minimum number 
+of jobs during each iteration.  The number of core types parameter decided 
+the minimum and maximum number of different core types that would be 
+available for the user.  The maximum number of cores per type parameter 
+decided how many of which type of core were available for a job.  
+The maximum number of threads per job parameter decided how big the
+ job could be and how many threads could be matched to available cores.  
+The speed ratios parameter decided how fast each job would be on each core type.
 
+Each algorithms is referred to according to the following
+abbreviations:  S.M. refers to the simple matching algorithm. 
+D.A. 1 refers to the deferred acceptance algorithm with evenly distributed quotas. 
+D.A. 2 refers to the deferred acceptance algorithm which performs a one-to-one 
+matching each iteration.  D.A. 2 is the algorithm whose preference matrices change
+each iteration due to jobs being matched and cores being used.  
+Prop. Alg. refers to the proposed algorithm introduced in this paper.
+
+The test cases represent three possible scenarios:  one where the VMs and 
+jobs are evenly matched, one where there are many available VM resources, 
+and one where the number of jobs typically outnumbers the number of 
+available VMs.  For these cases, the job performance is measured by the percent jobs 
+assigned, average available threads used, average resource score, and average 
+percent change in the speed score compared to the simple matching scheme.  The 
+VM performance is based on the average percent of cores used because its main 
+requirement was to have all of the resources among all of the VMs used.  All values 
+used for comparisons are defined as percentages.
 
 % Inputs Table
 \begin{table}[h]
@@ -902,7 +940,7 @@ It reflects how frequently each job is executed the best it could be on a given 
 \resizebox{.485\textwidth}{!}{%
     \begin{tabular}{l|l|l|l|l|}
         \cline{2-5}
-         & S. M. & D. A. 1 & D. A. 2 & Prop. Alg. \\ \hline
+         & S.M. & D.A. 1 & D.A. 2 & Prop. Alg. \\ \hline
         \multicolumn{1}{|l|}{Avg. Speed Score} & 780 & 722 & 942 & 989 \\ \hline
         \multicolumn{1}{|l|}{Percent Jobs Assigned} & 24.92\% & 41.67\% & 37.1\% & 34.49\% \\ \hline
         \multicolumn{1}{|l|}{Avg. Avail. Threads Used} & 71.41\% & 78.96\% & 65.57\% & 64.83\% \\ \hline
@@ -922,7 +960,7 @@ It reflects how frequently each job is executed the best it could be on a given 
     \resizebox{.485\textwidth}{!}{%
         \begin{tabular}{l|l|l|l|l|}
             \cline{2-5}
-             & S. M. & D. A. 1 & D. A. 2 & Prop. Alg. \\ \hline
+             & S.M. & D.A. 1 & D.A. 2 & Prop. Alg. \\ \hline
              \multicolumn{1}{|l|}{Avg. Speed Score} & 8668 & 8185 & 10524 & 9161 \\ \hline
              \multicolumn{1}{|l|}{Percent Jobs Assigned} & 57.93\% & 75.15\% & 74.45\% & 74.63\% \\ \hline
              \multicolumn{1}{|l|}{Avg. Avail. Threads Used} & 88.65\% & 85.81\% & 85.00\% & 79.91\% \\ \hline
@@ -942,7 +980,7 @@ It reflects how frequently each job is executed the best it could be on a given 
     \resizebox{.485\textwidth}{!}{%
         \begin{tabular}{l|l|l|l|l|}
             \cline{2-5}
-             & S. M. & D. A. 1 & D. A. 2 & Prop. Alg. \\ \hline
+             & S.M. & D.A. 1 & D.A. 2 & Prop. Alg. \\ \hline
              \multicolumn{1}{|l|}{Avg. Speed Score} & 2742 & 2541 & 3724 & 3516 \\ \hline
              \multicolumn{1}{|l|}{Percent Jobs Assigned} & 48.12\% & 68.78\% & 57.06\% & 59.73\% \\ \hline
              \multicolumn{1}{|l|}{Avg. Avail. Threads Used} & 89.65\% & 95.17\% & 92.89\% & 84.35\% \\ \hline
@@ -957,56 +995,19 @@ It reflects how frequently each job is executed the best it could be on a given 
 \end{table}
 % End Comparison Table III
 
-These algorithms were compared in three different tests.  
-For each test, 
-a set of randomly defined inputs were entered into each algorithm 
-for each iteration.  
-During these iterations, the metrics were sampled, 
-averaged, and stored until all of the simulations were finished.  
-All random
-numbers were generated using the uniform random function in MATLAB.  
-The parameters for the inputs of the comparison function for each 
-iteration can be found in Table I.
-
-The number of simulations represents how many simulations the comparison 
-program executed.  The number of VMs parameter decided the minimum 
-and maximum number of VMs, from 1 to a positive integer, during an iteration.  
-The number of jobs parameter decided the maximum and minimum number 
-of jobs during each iteration.  The number of core types parameter decided 
-the minimum and maximum number of different core types that would be 
-available for the user.  The maximum number of cores per type parameter 
-decided how many of which type of core were available for a job.  
-The maximum number of threads per job parameter decided how big the
- job could be and how many threads could be matched to available cores.  
-The speed ratios parameter decided how fast each job would be on each core type.
-
-Each of the algorithms are defined as follows:  S.M. stands for simple matching. 
- D.A.1 stands for deferred acceptance algorithm with evenly distributed quotas. 
- D.A. 2 stands for the deferred acceptance algorithm who performs a one-to-one 
-matching each iteration.  This is the algorithm whose preference matrices change
- each iteration due to jobs being matched and cores being used.  Prop. Alg. stands 
-for the proposed algorithm introduced in this paper.
-
-The test cases represent three possible scenarios:  one where the VMs and 
-jobs are evenly matched, one where there are many available VM resources, 
-and one where the number of jobs typically outnumbers the number of 
-available VMs.  For these cases, the job performance is measured by the percent jobs 
-assigned, average available threads used, average resource score, and average 
-percent change in the speed score compared to the simple matching scheme.  The 
-VM performance is based on the average percent of cores used because its main 
-requirement was to have all of the resources among all of the VMs used.  All values 
-used for comparisons are defined as percentages.
 
 \subsection{Comparison I:  Normal amount of VMs to jobs}
-
-In this case, simple matching performs worse compared to everyone else based 
+In this comparison case, the simple matching performed worse compared to 
+the other approaches
 on average available threads used, average cores used, and average resource
- score.  The first deferred acceptance algorithm performed similarly to simple
- matching.  Both the second deferred acceptance algorithm and our proposed 
+ score.  
+ The first deferred acceptance algorithm performed similarly to simple matching.  
+ Both the second deferred acceptance algorithm and the proposed 
 algorithm performed similarly to each other and better on average than the other 
-two for this example.  The first deferred acceptance algorithm performed better 
-in terms of resources used and threads used for this example.  The proposed 
-algorithm performed its jobs the fastest.
+two for this example.  
+The first deferred acceptance algorithm performed better 
+in terms of resources used and threads used for this example.  
+The proposed algorithm performed its jobs the fastest.
 
 \subsection{Comparison II: More VM resources compared to jobs}
 
