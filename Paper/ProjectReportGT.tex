@@ -1038,10 +1038,23 @@ score and percent of jobs assigned was usually the highest or second
  highest compared to the other algorithms.  It was also the slowest at 
 job completion compared to the others.  The second deferred acceptance
  algorithm performed generally the best in the rest of the categories, with
- the proposed algorithm measuring close to it.  The simple matching
- algorithm performed normally as well as the first deferred algorithm.  
-Its main weakness was that it normally did not match all of the available
- jobs, which would make users very unhappy.
+ the proposed algorithm measuring close to it.  The simple matching algorithm
+ performed normally as well as the first deferred algorithm.  Its main 
+weakness was that it normally did not have the resources to service 
+many of the available jobs, which would make users very unhappy.
+
+Compared to the other cases, the proposed algorithm did not have a
+significant strengths over the other algorithms.  On average, 
+it performed better than the simple matching and first deferred 
+acceptance algorithm for most of the metrics.  In addition, it was 
+normally as good as the second deferred acceptance algorithm. 
+ This algorithm was as VM-optimal in terms of cores used as the second 
+deferred acceptance algorithm, and more optimal compared to the other 
+two algorithms.  As for job-optimal, it was not as good as the first 
+deferred acceptance algorithm.  However, the proposed algorithm 
+created better matches for jobs than simple matching.
+
+
 
 \section{Related Work}
 \label{sec:related}
